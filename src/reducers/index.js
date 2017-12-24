@@ -1,7 +1,8 @@
-import { combinedReducers } from 'redux';
+import { combineReducers } from 'redux';
 import PomodoroReducer from './pomodoro_reducer';
 
-const rootReducer = combinedReducers({
+// Here is how the Application's state is generated
+const rootReducer = combineReducers({
   time: PomodoroReducer
 });
 

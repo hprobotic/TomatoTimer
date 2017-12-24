@@ -1,3 +1,6 @@
 export default function () {
-  return {time: 15}
+  return {
+    minutes: 15,
+    seconds: 0
+  }
 }
