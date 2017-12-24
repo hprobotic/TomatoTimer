@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import NavBar from './NavBar';
 import MainFeatures from '../components/MainFeatures';
-import TimeCountDown from '../containers/TimeCountDown';
+import TimeCountdown from '../containers/TimeCountDown';
 import MainButtons from '../containers/MainButtons';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         <br />
         <MainFeatures />
         <br />
-        <TimeCountDown />
+        <TimeCountdown />
         <br />
         <MainButtons />
       </div>

@@ -3,7 +3,7 @@ import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-class TimeCountDown extends Component {
+class TimeCountdown extends Component {
 
   // Set the date we're counting down to
   // countDown() {
@@ -49,4 +49,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(TimeCountDown);
+export default connect(mapStateToProps)(TimeCountdown);
