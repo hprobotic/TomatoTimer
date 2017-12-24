@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
-// import logo from './logo.svg';
-import './App.css';
-import NavBar from './components/NavBar';
-import MainFeatures from './components/MainFeatures';
+import '../App.css';
+import NavBar from './NavBar';
+import MainFeatures from './MainFeatures';
+import TimeCountDown from './TimeCountDown';
 
 class App extends Component {
   render() {
@@ -12,6 +11,8 @@ class App extends Component {
         <NavBar />
         <br/>
         <MainFeatures />
+        <br/>
+        <TimeCountDown />
       </div>
     );
   }
