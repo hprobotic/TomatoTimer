@@ -1,7 +1,7 @@
 export const START_COUNTDOWN = 'START_COUNTDOWN';
 export const STOP_COUNTDOWN  = 'STOP_COUNTDOWN';
 export const RESET_COUNTDOWN = 'RESET_COUNTDOWN';
-export const ON_TICK = 'ON_TICK';
+export const ON_TICK         = 'ON_TICK';
 
 
 function leadingZero(n) {
