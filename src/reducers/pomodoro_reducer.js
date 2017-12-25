@@ -1,6 +1,6 @@
 import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN } from '../actions/index';
 const initialState = {
-  startedAt: 25,
+  startedAt: undefined,
   stoppedAt: undefined,
   baseTime: undefined
 };
