@@ -1,11 +1,13 @@
 import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK } from '../actions/index';
+
 const POMODORO = 25
+const SECONDS  = '00'
 
 const initialState = {
   pomodoro: {
     display: {
       minutes: POMODORO,
-      seconds: '00'
+      seconds: SECONDS
     },
     ticking: false
   }
@@ -33,7 +35,7 @@ export default function (state = initialState, action) {
         pomodoro: {
           display: {
             minutes: POMODORO,
-            seconds: '00'
+            seconds: SECONDS
           },
           ticking: true
         }

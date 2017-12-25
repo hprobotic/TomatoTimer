@@ -33,8 +33,8 @@ class MainButtons extends Component {
         <Grid centered columns={3}>
           {/* <Button color='green' size='massive'>Start</Button> */}
           <Button color='green' size='massive' onClick={() => this.props.startCountdown()}>Start</Button>
-          {/* <Button color='red' size='massive' onClick={() => this.props.stopCountdown()}>Stop</Button>
-          <Button color='gray' size='massive' onClick={() => this.props.resetCountdown()}>Reset</Button> */}
+          <Button color='red' size='massive' onClick={() => this.props.stopCountdown()}>Stop</Button>
+          <Button color='gray' size='massive' onClick={() => this.props.resetCountdown()}>Reset</Button>
         </Grid>
       </div>
     )
