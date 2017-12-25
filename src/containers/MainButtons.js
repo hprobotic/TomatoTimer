@@ -2,75 +2,39 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
-import { startCountdown } from '../actions/index';
+import moment from 'moment'
+import { startCountdown, onTick } from '../actions/index';
 import _ from 'lodash';
 
-
 class MainButtons extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.getElapsedTime = this.getElapsedTime.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
-
-  // Set the date we're counting down to
-  // countDown() {
-  //   let now = new Date();
-  //   let next_15_minutes = now.setMinutes(now.getMinutes() + 15)
-  //   console.log(next_15_minutes);
-  //   let x = setInterval(() => {
-  //     // Find the distance between now an the count down date
-  //     let distance = next_15_minutes - now;
-  //     console.log('called');
-  //     console.log(distance);
-  //     // Time calculations for minutes and seconds
-  //     this.setState({
-  //       minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-  //       seconds: Math.floor((distance % (1000 * 60)) / 1000)
-  //     });
-
-
-  // If the count down is finished, write some text
-  //   if (distance < 0) {
-  //     clearInterval(x);
-  //   }
-  // }, 1000);
-  // }
-
-  // componentDidMount() {
-  //   this.interval = setInterval(this.forceUpdate.bind(this), this.props.updateInterval || 33);
+  // shouldComponentUpdate() {
+  //   return true;
   // }
 
   // componentWillUnmount() {
   //   clearInterval(this.interval);
   // }
 
-  
-
-
   render() {
-  function getElapsedTime(baseTime, startedAt, stoppedAt = new Date().getTime()) {
-      if (!startedAt) {
-        return 0;
-      } else {
-        return stoppedAt - startedAt + baseTime;
-      }
+    console.log(`Current props: ${JSON.stringify(this.props)}`);
+    if (this.props.ticking) {
+      console.log('inside of Did Mount');
+      setInterval(this.props.onTick(this.props.minutes), 1000);
     }
-    console.log(_.keys(this.props));
-    console.log(_.values(this.props));
-    console.log(this.props);
-    const { baseTime, startedAt, stoppedAt } = this.props;
-    const elapsed = getElapsedTime(baseTime, startedAt, stoppedAt);
-
     return (
       <div>
         <Grid textAlign='center'>
-          <h1 className='time-countdown'>{elapsed}</h1>
+          <h1 className='time-countdown'>{this.props.minutes} : {this.props.seconds}</h1>
         </Grid>
         <Grid centered columns={3}>
+          {/* <Button color='green' size='massive'>Start</Button> */}
           <Button color='green' size='massive' onClick={() => this.props.startCountdown()}>Start</Button>
-          <Button color='red' size='massive' onClick={() => this.props.stopCountdown()}>Stop</Button>
-          <Button color='gray' size='massive' onClick={() => this.props.resetCountdown()}>Reset</Button>
+          {/* <Button color='red' size='massive' onClick={() => this.props.stopCountdown()}>Stop</Button>
+          <Button color='gray' size='massive' onClick={() => this.props.resetCountdown()}>Reset</Button> */}
         </Grid>
       </div>
     )
@@ -79,9 +43,12 @@ class MainButtons extends Component {
 
 
 function mapStateToProps(state) {
-  // Whatever is returned from here will show up as props inside of MainFeatures
+  console.log(`Current Redux State: ${JSON.stringify(state)}`);
+  // Whatever is returned from here will show up as props inside of MainButtons
   return {
-    time: state.time
+    minutes: state.timer.pomodoro.display.minutes,
+    seconds: state.timer.pomodoro.display.seconds,
+    ticking: state.timer.pomodoro.ticking
   }
 }
 
@@ -90,8 +57,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever countDown is called, the result should be passed 
   // to all of our reducers
-  return bindActionCreators({ startCountdown: startCountdown }, dispatch)
+  return bindActionCreators({
+    startCountdown: startCountdown,
+    onTick: onTick
+  }, dispatch)
 }
 
 // Promote MainButtons from a component to a container - it needs to know about this new dispatch method, countDown. Make it available as a prop.
-export default connect(null, mapDispatchToProps)(MainButtons)
+export default connect(mapStateToProps, mapDispatchToProps)(MainButtons)
