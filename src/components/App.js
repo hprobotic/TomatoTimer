@@ -10,7 +10,9 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <br />
+        <br />
         <MainFeatures />
+        <br />
         <br />
         <MainButtons />
       </div>

@@ -1,30 +1,48 @@
-import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN } from '../actions/index';
+import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK } from '../actions/index';
+
+const POMODORO = 25
+const SECONDS  = '00'
+
 const initialState = {
-  startedAt: 25,
-  stoppedAt: undefined,
-  baseTime: undefined
+  pomodoro: {
+    display: {
+      minutes: POMODORO,
+      seconds: SECONDS
+    },
+    ticking: false
+  }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case ON_TICK:
+      console.log('just went through case ON_TICK...');
+      return {
+        pomodoro: {
+          display: {
+            minutes: action.nextMinute,
+            seconds: action.nextSecond
+          }
+        }
+      };
     case RESET_COUNTDOWN:
       return {
-        ...state,
-        baseTime: 0,
-        startedAt: state.startedAt ? action.now : undefined,
-        stoppedAt: state.stoppedAt ? action.now : undefined
+        ...state
       };
     case START_COUNTDOWN:
+      console.log('just went through case START_COUNTDOWN...');
       return {
-        ...state,
-        baseTime: action.baseTime,
-        startedAt: action.now,
-        stoppedAt: undefined
+        pomodoro: {
+          display: {
+            minutes: POMODORO,
+            seconds: SECONDS
+          },
+          ticking: true
+        }
       };
     case STOP_COUNTDOWN:
       return {
-        ...state,
-        stoppedAt: action.now
+        ...state
       }
     default:
       return state;
