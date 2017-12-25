@@ -14,7 +14,7 @@ export function onTick(currentMinute) {
   return {
     type: ON_TICK,
     nextMinute: (currentMinute * 60 - 1) / 60,
-    nextSecond: leadingZero(Math.floor((currentMinute * 60) % 60))
+    nextSecond: leadingZero(Math.floor((currentMinute * 60 - 1) % 60))
   }
 }
 

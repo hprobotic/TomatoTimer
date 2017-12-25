@@ -11,20 +11,21 @@ class MainButtons extends Component {
     super(props);
   }
 
-  // shouldComponentUpdate() {
-  //   return true;
-  // }
+  componentDidUpdate() {
+    if (this.props.ticking) {
+      console.log('inside of Did Mount');
+      this.interval = setInterval(() => {
+        this.props.onTick(this.props.minutes)
+      }, 1000);
+    }
+  }
 
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
   render() {
     console.log(`Current props: ${JSON.stringify(this.props)}`);
-    if (this.props.ticking) {
-      console.log('inside of Did Mount');
-      setInterval(this.props.onTick(this.props.minutes), 1000);
-    }
     return (
       <div>
         <Grid textAlign='center'>

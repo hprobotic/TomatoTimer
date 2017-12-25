@@ -24,10 +24,7 @@ export default function (state = initialState, action) {
       };
     case RESET_COUNTDOWN:
       return {
-        ...state,
-        baseTime: 0,
-        startedAt: state.startedAt ? action.now : undefined,
-        stoppedAt: state.stoppedAt ? action.now : undefined
+        ...state
       };
     case START_COUNTDOWN:
       console.log('just went through case START_COUNTDOWN...');
@@ -42,8 +39,7 @@ export default function (state = initialState, action) {
       };
     case STOP_COUNTDOWN:
       return {
-        ...state,
-        stoppedAt: action.now
+        ...state
       }
     default:
       return state;
