@@ -20,12 +20,11 @@ class MainButtons extends Component {
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
     console.log(`Current props: ${JSON.stringify(this.props)}`);
+    if (this.props.minutes === 0) {
+      clearInterval(this.interval);
+    }
     return (
       <div>
         <Grid textAlign='center'>
