@@ -9,7 +9,18 @@ import _ from 'lodash';
 class MainButtons extends Component {
   constructor(props) {
     super(props);
+    // this.openModal = this.openModal.bind(this);
+    // this.closeModal = this.closeModal.bind(this);
+    this.state = {
+      open: false
+    }
   }
+
+  // componentDidMount() {
+  //   $(function () {
+  //     $("#setting-modal").appendTo("body");
+  //   });
+  // }
 
   componentDidUpdate() {
     console.log(this.props.ticking);
@@ -31,8 +42,8 @@ class MainButtons extends Component {
         <Grid textAlign='center'>
           <h1 className='time-countdown'>{this.props.minutes} : {this.props.seconds}</h1>
         </Grid>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <Grid centered columns={3}>
           {/* <Button color='green' size='massive'>Start</Button> */}
           <Button color='green' size='massive' onClick={() => this.props.startCountdown()}>Start</Button>
