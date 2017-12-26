@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
 import moment from 'moment'
-import { startCountdown, onTick } from '../actions/index';
+import { startCountdown, stopCountdown, resetCountdown, onTick } from '../actions/index';
 import _ from 'lodash';
 
 class MainButtons extends Component {
@@ -12,6 +12,7 @@ class MainButtons extends Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props.ticking);
     if (this.props.ticking) {
       console.log('inside of Did Mount');
       this.interval = setInterval(() => {
@@ -22,7 +23,7 @@ class MainButtons extends Component {
 
   render() {
     console.log(`Current props: ${JSON.stringify(this.props)}`);
-    if (this.props.minutes === 0) {
+    if (this.props.minutes === 0 || this.props.ticking === false) {
       clearInterval(this.interval);
     }
     return (
@@ -44,6 +45,10 @@ class MainButtons extends Component {
 
 function mapStateToProps(state) {
   console.log(`Current Redux State: ${JSON.stringify(state)}`);
+  console.log(`Ticking value: ${state.timer.pomodoro.ticking}`);
+  console.log(`Minutes: ${state.timer.pomodoro.display.minutes}`);
+  console.log(`Seconds: ${state.timer.pomodoro.display.seconds}`);
+
   // Whatever is returned from here will show up as props inside of MainButtons
   return {
     minutes: state.timer.pomodoro.display.minutes,
@@ -59,7 +64,9 @@ function mapDispatchToProps(dispatch) {
   // to all of our reducers
   return bindActionCreators({
     startCountdown: startCountdown,
-    onTick: onTick
+    onTick: onTick,
+    stopCountdown: stopCountdown,
+    resetCountdown: resetCountdown
   }, dispatch)
 }
 
