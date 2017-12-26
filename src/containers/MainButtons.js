@@ -14,7 +14,18 @@ import _ from 'lodash';
 class MainButtons extends Component {
   constructor(props) {
     super(props);
+    // this.openModal = this.openModal.bind(this);
+    // this.closeModal = this.closeModal.bind(this);
+    this.state = {
+      open: false
+    }
   }
+
+  // componentDidMount() {
+  //   $(function () {
+  //     $("#setting-modal").appendTo("body");
+  //   });
+  // }
 
   componentDidUpdate() {
     console.log(this.props.ticking);
