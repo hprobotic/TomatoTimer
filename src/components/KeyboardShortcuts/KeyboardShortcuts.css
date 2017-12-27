@@ -1,0 +1,8 @@
+.keyboard-shorcuts {
+  font-size: 12px;
+  color: lightgray;
+}
+.keyboard-shorcuts span {
+  display: inline-block;
+  margin: 0 20px 5px;
+}

@@ -1,0 +1,13 @@
+.quotes {
+  text-align: center;
+  font-family: 'Old Standard TT', sans-serif;
+  margin-bottom: 25px;
+}
+.quotes p {
+  margin-bottom: 5px;
+  font-style: italic;
+}
+.quotes .author {
+  text-transform: uppercase;
+  font-style: normal;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Button, Grid } from 'semantic-ui-react';
-import { defaultBreak, shortBreak, longBreak } from '../actions';
+import { defaultBreak, shortBreak, longBreak } from '../../actions';
 import { connect } from 'react-redux';
 
 class MainFeatures extends Component {

@@ -1,27 +1,24 @@
 import React from 'react';
-import { Message } from 'semantic-ui-react';
+import './KeyboardShortcuts.css';
 
 const KeyboardShortcuts = () => (
-  <Message>
-    <Message.Header>Keyboard Shortcuts</Message.Header>
-    <ul className="disc">
-      <li>
+  <div className="keyboard-shorcuts">
+    <p>
+      keyboard shortcuts:
+      <span>
         <strong>SPACE </strong>&nbsp;&nbsp;Start or Stop the timer
-      </li>
-      <li>
-        <strong>ALT + P</strong>&nbsp;&nbsp;Pomodoro
-      </li>
-      <li>
+      </span>
+      <span>
         <strong>ALT + S</strong>&nbsp;&nbsp;Short Break
-      </li>
-      <li>
+      </span>
+      <span>
         <strong>ALT + L</strong>&nbsp;&nbsp;Long Break
-      </li>
-      <li>
+      </span>
+      <span>
         <strong>ALT + R</strong>&nbsp;&nbsp;Reset Timer
-      </li>
-    </ul>
-  </Message>
+      </span>
+    </p>
+  </div>
 );
 
 export default KeyboardShortcuts;
