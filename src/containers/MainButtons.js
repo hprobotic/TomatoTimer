@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
-import moment from 'moment'
-import { startCountdown, stopCountdown, resetCountdown, onTick } from '../actions/index';
+import moment from 'moment';
+import {
+  startCountdown,
+  stopCountdown,
+  resetCountdown,
+  onTick
+} from '../actions/index';
 import _ from 'lodash';
 
 class MainButtons extends Component {
@@ -16,17 +21,17 @@ class MainButtons extends Component {
     if (this.props.ticking) {
       console.log('inside of Did Mount');
       this.interval = setInterval(() => {
-        this.props.onTick(this.props.seconds)
+        this.props.onTick(this.props.seconds);
       }, 1000);
     }
   }
 
-  format = (seconds) => {
-    let m = Math.floor(seconds % 3600 / 60);
-    let s = Math.floor(seconds % 3600 % 60);
-    let timeFormated = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  format = seconds => {
+    let m = Math.floor((seconds % 3600) / 60);
+    let s = Math.floor((seconds % 3600) % 60);
+    let timeFormated = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
     return timeFormated;
-  }
+  };
 
   render() {
     console.log(`Current props: ${JSON.stringify(this.props)}`);
@@ -35,22 +40,39 @@ class MainButtons extends Component {
     }
     return (
       <div>
-        <Grid textAlign='center'>
-          <h1 className='time-countdown'>{this.format(this.props.seconds)}</h1>
+        <Grid textAlign="center">
+          <h1 className="time-countdown">{this.format(this.props.seconds)}</h1>
         </Grid>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <Grid centered columns={3}>
           {/* <Button color='green' size='massive'>Start</Button> */}
-          <Button color='green' size='massive' onClick={() => this.props.startCountdown()}>Start</Button>
-          <Button color='red' size='massive' onClick={() => this.props.stopCountdown()}>Stop</Button>
-          <Button color='gray' size='massive' onClick={() => this.props.resetCountdown()}>Reset</Button>
+          <Button
+            color="green"
+            size="massive"
+            onClick={() => this.props.startCountdown()}
+          >
+            Start
+          </Button>
+          <Button
+            color="red"
+            size="massive"
+            onClick={() => this.props.stopCountdown()}
+          >
+            Stop
+          </Button>
+          <Button
+            color="gray"
+            size="massive"
+            onClick={() => this.props.resetCountdown()}
+          >
+            Reset
+          </Button>
         </Grid>
       </div>
-    )
+    );
   }
 }
-
 
 function mapStateToProps(state) {
   console.log(`Current Redux State: ${JSON.stringify(state)}`);
@@ -61,21 +83,23 @@ function mapStateToProps(state) {
   return {
     seconds: state.timer.pomodoro.seconds,
     ticking: state.timer.pomodoro.ticking
-  }
+  };
 }
-
 
 // Anything returned from this function will end up as props on the MainButtons container
 function mapDispatchToProps(dispatch) {
-  // Whenever countDown is called, the result should be passed 
+  // Whenever countDown is called, the result should be passed
   // to all of our reducers
-  return bindActionCreators({
-    startCountdown: startCountdown,
-    onTick: onTick,
-    stopCountdown: stopCountdown,
-    resetCountdown: resetCountdown
-  }, dispatch)
+  return bindActionCreators(
+    {
+      startCountdown: startCountdown,
+      onTick: onTick,
+      stopCountdown: stopCountdown,
+      resetCountdown: resetCountdown
+    },
+    dispatch
+  );
 }
 
 // Promote MainButtons from a component to a container - it needs to know about this new dispatch method, countDown. Make it available as a prop.
-export default connect(mapStateToProps, mapDispatchToProps)(MainButtons)
+export default connect(mapStateToProps, mapDispatchToProps)(MainButtons);
