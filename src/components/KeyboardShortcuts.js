@@ -4,7 +4,7 @@ import { Message } from 'semantic-ui-react';
 const KeyboardShortcuts = () => (
   <Message>
     <Message.Header>Keyboard Shortcuts</Message.Header>
-    <ul class="disc">
+    <ul className="disc">
       <li>
         <strong>SPACE </strong>&nbsp;&nbsp;Start or Stop the timer
       </li>

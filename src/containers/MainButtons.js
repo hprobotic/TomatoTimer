@@ -8,22 +8,82 @@ import {
   stopCountdown,
   resetCountdown,
   onTick
-} from '../actions/index';
+} from '../actions';
 import _ from 'lodash';
 
 class MainButtons extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      timerRunning: false,
+      currentSeconds: 1500
+    };
   }
 
-  componentDidUpdate() {
-    console.log(this.props.ticking);
-    if (this.props.ticking) {
-      console.log('inside of Did Mount');
-      this.interval = setInterval(() => {
-        this.props.onTick(this.props.seconds);
-      }, 1000);
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentSeconds: this.props.seconds
+    });
+  }
+
+  tick() {
+    this.setState(
+      prevState => ({
+        currentSeconds: prevState.currentSeconds - 1
+      }),
+      () => {
+        if (this.state.currentSeconds === 0) this.resetInterval();
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  handleKeyDown = e => {
+    if (e.altKey) {
+      switch (e.which) {
+        case 80:
+          console.log('Alt + P');
+          break;
+        case 83:
+          console.log('Alt + S');
+          break;
+        case 76:
+          console.log('Alt + L');
+          break;
+        case 82:
+          this.onStopButtonPressed();
+          break;
+        default:
+          break;
+      }
+    } else {
+      if (e.which == 32) {
+        console.log('Go space');
+        if (this.state.timerRunning) {
+          this.onStopButtonPressed();
+        } else {
+          this.onStartButtonPressed();
+        }
+      }
     }
+  };
+
+  resetInterval() {
+    clearInterval(this.timerID);
+  }
+
+  restartInterval() {
+    clearInterval(this.timerID);
+    this.timerID = setInterval(() => {
+      this.tick();
+    }, 1000);
   }
 
   format = seconds => {
@@ -33,38 +93,62 @@ class MainButtons extends Component {
     return timeFormated;
   };
 
+  onStartButtonPressed = () => {
+    if (this.state.timerRunning) return;
+    this.restartInterval();
+    this.setState({
+      timerRunning: true
+    });
+  };
+
+  onStopButtonPressed = () => {
+    if (!this.state.timerRunning) return;
+    this.resetInterval();
+    this.setState({
+      timerRunning: false
+    });
+  };
+
+  onResetButtonPressed = () => {
+    this.resetInterval();
+    this.setState({
+      timerRunning: false,
+      currentSeconds: this.props.seconds
+    });
+  };
+
   render() {
-    console.log(`Current props: ${JSON.stringify(this.props)}`);
-    if (this.props.minutes === 0 || this.props.ticking === false) {
-      clearInterval(this.interval);
-    }
+    const { timerRunning } = this.state;
     return (
       <div>
         <Grid textAlign="center">
-          <h1 className="time-countdown">{this.format(this.props.seconds)}</h1>
+          <h1 className="time-countdown">
+            {this.format(this.state.currentSeconds)}
+          </h1>
         </Grid>
         <br />
         <br />
         <Grid centered columns={3}>
-          {/* <Button color='green' size='massive'>Start</Button> */}
           <Button
             color="green"
             size="massive"
-            onClick={() => this.props.startCountdown()}
+            disabled={timerRunning}
+            onClick={() => this.onStartButtonPressed()}
           >
             Start
           </Button>
           <Button
             color="red"
             size="massive"
-            onClick={() => this.props.stopCountdown()}
+            disabled={!timerRunning}
+            onClick={() => this.onStopButtonPressed()}
           >
             Stop
           </Button>
           <Button
-            color="gray"
+            color="grey"
             size="massive"
-            onClick={() => this.props.resetCountdown()}
+            onClick={this.onResetButtonPressed}
           >
             Reset
           </Button>
@@ -75,21 +159,13 @@ class MainButtons extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(`Current Redux State: ${JSON.stringify(state)}`);
-  console.log(`Ticking value: ${state.timer.pomodoro.ticking}`);
-  console.log(`Seconds: ${state.timer.pomodoro.seconds}`);
-
-  // Whatever is returned from here will show up as props inside of MainButtons
   return {
-    seconds: state.timer.pomodoro.seconds,
-    ticking: state.timer.pomodoro.ticking
+    seconds: state.pomodoro.seconds,
+    ticking: state.pomodoro.ticking
   };
 }
 
-// Anything returned from this function will end up as props on the MainButtons container
 function mapDispatchToProps(dispatch) {
-  // Whenever countDown is called, the result should be passed
-  // to all of our reducers
   return bindActionCreators(
     {
       startCountdown: startCountdown,
