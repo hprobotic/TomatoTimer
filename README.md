@@ -7,26 +7,26 @@ Time spent: **Working On It** hours spent in total
 ## User Stories
 
 The following **required** functionality is completed:
-- [] User can see 3 main tabs which are pomodoro, short break, and long break.
-- [] User can use start, stop, reset buttons for all the tabs.
-- [] User can see the currently active tab.
-- [] The app starts to count when user clicks on one the 3 tabs.
-- [] User sees an error message when there is a card processing error.
-- [] User can user their keyboard to select the tab, start the time, stop the time, and reset the time.
-- [] User can enable and disable desktop alert.
+- [ ] User can see 3 main tabs which are pomodoro, short break, and long break.
+- [ ] User can use start, stop, reset buttons for all the tabs.
+- [ ] User can see the currently active tab.
+- [ ] The app starts to count when user clicks on one the 3 tabs.
+- [ ] User sees an error message when there is a card processing error.
+- [ ] User can user their keyboard to select the tab, start the time, stop the time, and reset the time.
+- [ ] User can enable and disable desktop alert.
 - User can go to setting and change:
-  [] 1. Pomodoro duration.
-  [] 2. Short break duration.
-  [] 3. Long break duration.
-  [] 4. Sound.
-  [] 5. Sound Volume
+  - [ ] 1. Pomodoro duration.
+  - [ ] 2. Short break duration.
+  - [ ] 3. Long break duration.
+  - [ ] 4. Sound.
+  - [ ] 5. Sound Volume
 
      
 The following optional features are implemented:
-- [] Play song during pomodoro time.
-- [] Reset setting.
-- [] Sound test.
-- [] Sharing the application through facebook.
+- [ ] Play song during pomodoro time.
+- [ ] Reset setting.
+- [ ] Sound test.
+- [ ] Sharing the application through facebook.
 
 ## Video Walkthrough
 
