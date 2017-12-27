@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
-import { Segment, Container, Menu, Item } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 
 class Navbar extends Component {
+  state = {};
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
   render() {
+    const { activeItem } = this.state;
     return (
-      <Segment inverted color='black' className='homepage-segment'>
-        <Container>
-          <Menu inverted pointing secondary>
-            <h1>Tomato Timer</h1>
-            <Item className='right'>
-              <a href="#">FAQ</a>
-              <a href="#" className='homepage-setting'>Settings</a>
-            </Item>
-          </Menu>
-        </Container>
-      </Segment>
+      <Menu size="large">
+        <Menu.Item header>Pomodoro</Menu.Item>
+        <Menu.Menu position="right">
+          <Menu.Item
+            name="faq"
+            active={activeItem === 'faq'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="setting"
+            active={activeItem === 'setting'}
+            onClick={this.handleItemClick}
+          />
+        </Menu.Menu>
+      </Menu>
     );
   }
 }
