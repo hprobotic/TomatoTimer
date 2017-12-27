@@ -10,13 +10,15 @@ Time spent: **Working On It** hours spent in total
 
 The following **required** functionality is completed:
 
-* [ ] User can see 3 main tabs which are pomodoro, short break, and long break.
-* [ ] User can use start, stop, reset buttons for all the tabs.
+* [x] User can see 3 main tabs which are pomodoro, short break, and long break. [Deprecated]
+* [x] User can use start, stop, reset buttons for all the tabs.
 * [ ] User can see the currently active tab.
 * [ ] The app starts to count when user clicks on one the 3 tabs.
 * [ ] User sees an error message when there is a card processing error.
 * [ ] User can user their keyboard to select the tab, start the time, stop the time, and reset the time.
 * [ ] User can enable and disable desktop alert.
+* [ ] User can sync data: focus hours, focus count, settings, name, email
+* [ ] Daily quotes
 * User can go to setting and change:
   * [ ] 1. Pomodoro duration.
   * [ ] 2. Short break duration.
@@ -30,6 +32,9 @@ The following optional features are implemented:
 * [ ] Reset setting.
 * [ ] Sound test.
 * [ ] Sharing the application through facebook.
+* [ ] Premium features: Integrate with Spotify, Random background image from unsplash.
+* [ ] Publish on chrome extension store
+* [ ] Built desktop version with electron
 
 ## Video Walkthrough
 
