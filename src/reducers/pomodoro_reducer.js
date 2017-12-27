@@ -1,8 +1,8 @@
-import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK, SHORT_BREAK, LONG_BREAK} from '../actions';
+import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK, SHORT_BREAK, LONG_BREAK, SAVE_SETTING } from '../actions';
 
-const SECONDS = 1500
+const SECONDS          = 1500
 const SHORT_BREAK_SECS = 300
-const LONG_BREAK_SECS = 600
+const LONG_BREAK_SECS  = 600
 
 const initialState = {
   pomodoro: {
@@ -20,8 +20,15 @@ export default function (state = initialState, action) {
           seconds: action.seconds
         }
       };
+      case SAVE_SETTING:
+      console.log('just went through case Save Setting...');
+      return {
+        pomodoro: {
+          seconds: action.pomodoro
+        }
+      };
     case RESET_COUNTDOWN:
-    console.log('just went through case RESET_COUNTDOWN...');
+      console.log('just went through case RESET_COUNTDOWN...');
       return {
         ...initialState
       };

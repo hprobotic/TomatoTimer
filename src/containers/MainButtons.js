@@ -28,7 +28,6 @@ class MainButtons extends Component {
   // }
 
   componentDidUpdate() {
-    console.log(this.props.ticking);
     if (this.props.ticking) {
       console.log('inside of Did Mount');
       this.interval = setInterval(() => {
@@ -46,7 +45,7 @@ class MainButtons extends Component {
 
   render() {
     console.log(`Current props: ${JSON.stringify(this.props)}`);
-    if (this.props.minutes === 0 || this.props.ticking === false) {
+    if (this.props.seconds === 0 || this.props.ticking === false) {
       clearInterval(this.interval);
     }
     return (
