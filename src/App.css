@@ -1,5 +1,19 @@
+.random-bg {
+  background: url(/assets/images/background.jpg) center center no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
 .App {
   padding: 32px;
+  background: url(/assets/images/overlay-center.png) center center no-repeat;
+  background-size: cover;
 }
 
 .time-countdown {
@@ -8,10 +22,10 @@
 
 .grid-container {
   display: grid;
-  grid-template: repeat(4, [row] minmax(120px, 1fr)) / repeat(4, [col] 1fr);
+  grid-template: repeat(6, [row] minmax(80px, 1fr)) / repeat(4, [col] 1fr);
   grid-gap: 20px;
-  width: 100%;
-  height: 100vh;
+  width: calc(100vw - 64px);
+  height: calc(100vh - 64px);
 }
 
 .item-1 {
@@ -31,7 +45,7 @@
 
 .item-4 {
   grid-column: col 2 / span 2;
-  grid-row: row 2;
+  grid-row: row 2 / span 3;
 }
 
 .item-5 {
@@ -40,13 +54,13 @@
 }
 
 .item-6 {
-  grid-column: col 2 / span 2;
-  grid-row: row 3;
+  grid-column: col 1 / span 4;
+  grid-row: row 5;
 }
 
 .item-7 {
   grid-column: col 1 / span 4;
-  grid-row: row 4;
+  grid-row: row 6;
   text-align: center;
 }
 
