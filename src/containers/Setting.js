@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   Modal,
   Button,
@@ -9,27 +9,41 @@ import {
   Input,
   Grid
 } from 'semantic-ui-react'
-import {saveSetting} from '../actions/index';
+import { saveSetting } from '../actions/index';
 
 class Setting extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: true,
       pomodoro: 25,
       shortbreak: 5,
       longbreak: 10
     }
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
-  handleChange() {
-
+  handleSave(pomodoro, shortbreak, longbreak, closeModal) {
+    this.props.saveSetting(pomodoro, shortbreak, longbreak);
+    this.props.saveSetting;
+    closeModal();
   }
+
+  // handleChange(event, type) {
+  //   this.setState({
+  //     type: event.target.value
+  //   })
+  // }
+
 
   render() {
     return (
-      <Modal closeIcon={true} open={this.props.open}>
-        <Header icon='setting' content='Application Setting'/>
+      <Modal
+        closeIcon={true}
+        open={this.props.open}
+        onClose={this.props.close}
+      >
+        <Header icon='setting' content='Application Setting' />
         <Modal.Content>
           <Modal.Description>
             <h3>Set Custom Times(In Minutes)</h3>
@@ -37,7 +51,7 @@ class Setting extends Component {
               <Grid.Row>
                 <Input
                   value={this.state.pomodoro}
-                  onChange={}
+                  onChange={(event) => { this.setState({ pomodoro: event.target.value }) }}
                   id='time_pomodoro'
                   type='number'
                   min='1'
@@ -46,6 +60,7 @@ class Setting extends Component {
                   label='Pomodoro'></Input>
                 <Input
                   value={this.state.shortbreak}
+                  onChange={(event) => { this.setState({ shortbreak: event.target.value }) }}
                   id='time_shortbreak'
                   type='number'
                   min='1'
@@ -54,6 +69,7 @@ class Setting extends Component {
                   label='Short Break'></Input>
                 <Input
                   value={this.state.longbreak}
+                  onChange={(event) => { this.setState({ longbreak: event.target.value }) }}
                   id='time_longbreak'
                   type='number'
                   min='1'
@@ -66,15 +82,15 @@ class Setting extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button color='blue'>
-            <Icon name='repeat'/>
+            <Icon name='repeat' />
             Reset
           </Button>
           <Button
             color='green'
-            onClick={this
-            .props
-            .saveSetting(this.state.pomodoro, this.state.shortbreak, this.state.longbreak)}>
-            <Icon name='checkmark'/>
+            onClick={() => { this.handleSave(this.state.pomodoro, this.state.shortbreak, this.state.longbreak, this.props.close) }}
+          //      onClick={this.props.close}
+          >
+            <Icon name='checkmark' />
             Save
           </Button>
         </Modal.Actions>

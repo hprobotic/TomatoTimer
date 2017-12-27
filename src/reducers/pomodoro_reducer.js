@@ -1,6 +1,6 @@
 import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK, SHORT_BREAK, LONG_BREAK, SAVE_SETTING } from '../actions';
 
-const SECONDS          = 1500
+const SECONDS          =  localStorage.getItem('pomodoro') || 1500
 const SHORT_BREAK_SECS = 300
 const LONG_BREAK_SECS  = 600
 
@@ -21,7 +21,7 @@ export default function (state = initialState, action) {
         }
       };
       case SAVE_SETTING:
-      console.log('just went through case Save Setting...');
+      alert('just went through case Save Setting...');
       return {
         pomodoro: {
           seconds: action.pomodoro

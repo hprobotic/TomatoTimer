@@ -8,6 +8,13 @@ class Navbar extends Component {
     this.state = {
       open: false
     }
+    this.closeModal = this.closeModal.bind(this)
+  }
+
+  closeModal() {
+    this.setState({
+      open: false
+    });
   }
 
   render() {
@@ -19,7 +26,7 @@ class Navbar extends Component {
             <Item className='right'>
               <a href="#">FAQ</a>
               <a onClick={() =>{this.setState({open: true})}} href="#" className='homepage-setting'>Settings</a>
-              <Setting open={this.state.open}/>
+              <Setting open={this.state.open} close={this.closeModal}/>
             </Item>
           </Menu>
         </Container>

@@ -19,15 +19,15 @@ export function onTick(currentTime) {
 }
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
-  console.log('saving setting to local storage...');
-  localStorage.setItem('pomodoro', pomodoro);
-  localStorage.setItem('shortbreak', shortbreak);
-  localStorage.setItem('longbreak', longbreak);
+  alert('saving setting to local storage...');
+  localStorage.setItem('pomodoro', pomodoro * 60);
+  localStorage.setItem('shortbreak', shortbreak * 60);
+  localStorage.setItem('longbreak', longbreak * 60);
   return {
     type: SAVE_SETTING,
-    pomodoro: localStorage.getItem('pomodoro') * 60,
-    shortbreak: localStorage.getItem('shortbreak') * 60,
-    longbreak: localStorage.getItem('longbreak') * 60
+    pomodoro: localStorage.getItem('pomodoro'),
+    shortbreak: localStorage.getItem('shortbreak'),
+    longbreak: localStorage.getItem('longbreak')
   }
 }
 
