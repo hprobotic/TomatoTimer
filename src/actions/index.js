@@ -7,12 +7,11 @@ function leadingZero(n) {
   return n < 10 ? '0' + n : n;
 }
 
-export function onTick(currentMinute) {
+export function onTick(currentTime) {
   console.log('time is ticking...');
   return {
     type: ON_TICK,
-    nextMinute: (currentMinute * 60 - 1) / 60,
-    nextSecond: leadingZero(Math.floor((currentMinute * 60 - 1) % 60))
+    seconds: currentTime - 1
   }
 }
 

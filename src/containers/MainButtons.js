@@ -16,9 +16,16 @@ class MainButtons extends Component {
     if (this.props.ticking) {
       console.log('inside of Did Mount');
       this.interval = setInterval(() => {
-        this.props.onTick(this.props.minutes)
+        this.props.onTick(this.props.seconds)
       }, 1000);
     }
+  }
+
+  format = (seconds) => {
+    let m = Math.floor(seconds % 3600 / 60);
+    let s = Math.floor(seconds % 3600 % 60);
+    let timeFormated = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+    return timeFormated;
   }
 
   render() {
@@ -29,7 +36,7 @@ class MainButtons extends Component {
     return (
       <div>
         <Grid textAlign='center'>
-          <h1 className='time-countdown'>{this.props.minutes} : {this.props.seconds}</h1>
+          <h1 className='time-countdown'>{this.format(this.props.seconds)}</h1>
         </Grid>
         <br/>
         <br/>
@@ -48,13 +55,11 @@ class MainButtons extends Component {
 function mapStateToProps(state) {
   console.log(`Current Redux State: ${JSON.stringify(state)}`);
   console.log(`Ticking value: ${state.timer.pomodoro.ticking}`);
-  console.log(`Minutes: ${state.timer.pomodoro.display.minutes}`);
-  console.log(`Seconds: ${state.timer.pomodoro.display.seconds}`);
+  console.log(`Seconds: ${state.timer.pomodoro.seconds}`);
 
   // Whatever is returned from here will show up as props inside of MainButtons
   return {
-    minutes: state.timer.pomodoro.display.minutes,
-    seconds: state.timer.pomodoro.display.seconds,
+    seconds: state.timer.pomodoro.seconds,
     ticking: state.timer.pomodoro.ticking
   }
 }
