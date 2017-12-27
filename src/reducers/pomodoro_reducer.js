@@ -1,16 +1,12 @@
-import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK, SHORT_BREAK, LONG_BREAK} from '../actions/index';
+import { START_COUNTDOWN, STOP_COUNTDOWN, RESET_COUNTDOWN, ON_TICK, SHORT_BREAK, LONG_BREAK} from '../actions';
 
-const POMODORO = 25
-const SECONDS = '00'
-const SHORT_BREAK_MIN = 5
-const LONG_BREAK_MIN = 10
+const SECONDS = 1500
+const SHORT_BREAK_SECS = 300
+const LONG_BREAK_SECS = 600
 
 const initialState = {
   pomodoro: {
-    display: {
-      minutes: POMODORO,
-      seconds: SECONDS
-    },
+    seconds: SECONDS,
     ticking: false
   }
 };
@@ -21,10 +17,7 @@ export default function (state = initialState, action) {
       console.log('just went through case ON_TICK...');
       return {
         pomodoro: {
-          display: {
-            minutes: action.nextMinute,
-            seconds: action.nextSecond
-          }
+          seconds: action.seconds
         }
       };
     case RESET_COUNTDOWN:
@@ -36,10 +29,7 @@ export default function (state = initialState, action) {
       console.log('just went through case START_COUNTDOWN...');
       return {
         pomodoro: {
-          display: {
-            minutes: state.pomodoro.display.minutes,
-            seconds: state.pomodoro.display.seconds
-          },
+          seconds: state.pomodoro.seconds,
           ticking: action.ticking
         }
       };
@@ -47,30 +37,21 @@ export default function (state = initialState, action) {
       console.log('just went through case STOP_COUNTDOWN...');
       return {
         pomodoro: {
-          display: {
-            minutes: state.pomodoro.display.minutes,
-            seconds: state.pomodoro.display.seconds
-          },
+          seconds: state.pomodoro.seconds,
           ticking: action.ticking
         }
       }
     case SHORT_BREAK:
       return {
         pomodoro: {
-          display: {
-            minutes: SHORT_BREAK_MIN,
-            seconds: SECONDS
-          },
+          seconds: SHORT_BREAK_SECS,
           ticking: false
         }
       }
     case LONG_BREAK:
       return {
         pomodoro: {
-          display: {
-            minutes: LONG_BREAK_MIN,
-            seconds: SECONDS
-          },
+          seconds: LONG_BREAK_SECS,
           ticking: false
         }
       }

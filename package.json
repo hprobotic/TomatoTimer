@@ -3,8 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "moment": "^2.20.1",
+    "prettier": "^1.9.2",
+    "punycode": "^2.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
     "react-scripts": "^1.0.17",
     "semantic-ui-react": "^0.77.1"
   },
@@ -12,12 +20,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
-    "moment": "^2.20.1",
-    "punycode": "^2.1.0",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "eslint": "^4.14.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write --trailing-comma none",
+      "git add"
+    ]
   }
 }
