@@ -8,32 +8,32 @@ class MainFeatures extends Component {
   render() {
     return (
       <Grid centered>
-        <Button
-          attached="left"
-          size="massive"
-          color="twitter"
-          className="main-btn"
-          onClick={() => this.props.defaultBreak()}
-        >
-          Pomodoro
-        </Button>
-        <Button
-          size="massive"
-          color="twitter"
-          className="main-btn"
-          onClick={() => this.props.shortBreak()}
-        >
-          Short Break
-        </Button>
-        <Button
-          attached="right"
-          size="massive"
-          color="twitter"
-          className="main-btn"
-          onClick={() => this.props.longBreak()}
-        >
-          Long Break
-        </Button>
+        <Button.Group>
+          <Button
+            size="massive"
+            color="twitter"
+            className="main-btn"
+            onClick={() => this.props.defaultBreak()}
+          >
+            Pomodoro
+          </Button>
+          <Button
+            size="massive"
+            color="twitter"
+            className="main-btn"
+            onClick={() => this.props.shortBreak()}
+          >
+            Short Break
+          </Button>
+          <Button
+            size="massive"
+            color="twitter"
+            className="main-btn"
+            onClick={() => this.props.longBreak()}
+          >
+            Long Break
+          </Button>
+        </Button.Group>
       </Grid>
     );
   }

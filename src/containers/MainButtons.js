@@ -3,12 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
 import moment from 'moment';
-import {
-  startCountdown,
-  stopCountdown,
-  resetCountdown,
-  onTick
-} from '../actions';
+import { defaultBreak, shortBreak, longBreak } from '../actions';
 import _ from 'lodash';
 
 class MainButtons extends Component {
@@ -30,6 +25,16 @@ class MainButtons extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (this.props.seconds !== nextProps.seconds) {
+      this.onResetButtonPressed();
+      this.setState({
+        currentSeconds: nextProps.seconds
+      });
+    }
+  }
+
   tick() {
     this.setState(
       prevState => ({
@@ -49,13 +54,14 @@ class MainButtons extends Component {
     if (e.altKey) {
       switch (e.which) {
         case 80:
-          console.log('Alt + P');
+          this.props.defaultBreak();
           break;
         case 83:
-          console.log('Alt + S');
+          console.log('hello');
+          this.props.shortBreak();
           break;
         case 76:
-          console.log('Alt + L');
+          this.props.longBreak();
           break;
         case 82:
           this.onStopButtonPressed();
@@ -160,22 +166,19 @@ class MainButtons extends Component {
 
 function mapStateToProps(state) {
   return {
-    seconds: state.pomodoro.seconds,
-    ticking: state.pomodoro.ticking
+    seconds: state.pomodoro.seconds
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      startCountdown: startCountdown,
-      onTick: onTick,
-      stopCountdown: stopCountdown,
-      resetCountdown: resetCountdown
+      shortBreak: shortBreak,
+      longBreak: longBreak,
+      defaultBreak: defaultBreak
     },
     dispatch
   );
 }
 
-// Promote MainButtons from a component to a container - it needs to know about this new dispatch method, countDown. Make it available as a prop.
 export default connect(mapStateToProps, mapDispatchToProps)(MainButtons);
