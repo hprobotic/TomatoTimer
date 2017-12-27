@@ -1,16 +1,8 @@
-.homepage-segment {
- min-height: 120px;
- padding: 1em 0em;
+.App {
+  max-width: 1024px;
+  margin: 20px auto;
 }
 
-.homepage-setting {
- margin-left: 0.5em;
-}
-
-.main-btn {
-  /* width: 50%; */
-}
-
-.time-countdown{
+.time-countdown {
   font-size: 500% !important;
 }
