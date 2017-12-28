@@ -11,9 +11,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "react-scripts": "1.0.17",
-    "redux": "^3.7.2",
     "react-scripts": "^1.0.17",
+    "redux": "^3.7.2",
     "semantic-ui-react": "^0.77.1"
   },
   "scripts": {
@@ -21,14 +20,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "lint": "eslint bin build config server src tests",
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "eslint": "^4.14.0"
+    "eslint": "^4.14.0",
+    "redux-devtools": "^3.4.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write --trailing-comma none",
+      "prettier --single-quote --write --trailing-comma none --no-semi false",
       "git add"
     ]
   }

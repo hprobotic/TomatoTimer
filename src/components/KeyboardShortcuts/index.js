@@ -1,5 +1,5 @@
-import React from 'react';
-import './KeyboardShortcuts.css';
+import React from 'react'
+import './KeyboardShortcuts.css'
 
 const KeyboardShortcuts = () => (
   <div className="keyboard-shorcuts">
@@ -19,6 +19,6 @@ const KeyboardShortcuts = () => (
       </span>
     </p>
   </div>
-);
+)
 
-export default KeyboardShortcuts;
+export default KeyboardShortcuts

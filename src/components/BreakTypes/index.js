@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { Button, Grid } from 'semantic-ui-react';
-import { defaultBreak, shortBreak, longBreak } from '../../actions';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { Button, Grid } from 'semantic-ui-react'
+import { defaultBreak, shortBreak, longBreak } from '../../actions'
+import { connect } from 'react-redux'
 
 class MainFeatures extends Component {
   render() {
@@ -35,7 +35,7 @@ class MainFeatures extends Component {
           </Button>
         </Button.Group>
       </Grid>
-    );
+    )
   }
 }
 function mapStateToProps(state) {}
@@ -48,7 +48,7 @@ function mapDispatchToProps(dispatch) {
       defaultBreak: defaultBreak
     },
     dispatch
-  );
+  )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainFeatures);
+export default connect(mapStateToProps, mapDispatchToProps)(MainFeatures)
