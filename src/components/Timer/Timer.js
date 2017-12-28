@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
-import moment from 'moment';
 import { defaultBreak, shortBreak, longBreak } from '../../actions';
-import _ from 'lodash';
 import './Timer.css';
 
 const PROGRESS_CIRCUMFERENCE = 992.743278534;
@@ -15,7 +13,7 @@ class MainButtons extends Component {
     this.state = {
       timerRunning: false,
       currentSeconds: 1500,
-      timerStatus: 'init'
+      timerStatus: 'init',
     };
   }
 
@@ -25,7 +23,7 @@ class MainButtons extends Component {
 
   componentDidMount() {
     this.setState({
-      currentSeconds: this.props.seconds
+      currentSeconds: this.props.seconds,
     });
   }
 
@@ -34,7 +32,7 @@ class MainButtons extends Component {
     if (this.props.seconds !== nextProps.seconds) {
       this.onResetButtonPressed();
       this.setState({
-        currentSeconds: nextProps.seconds
+        currentSeconds: nextProps.seconds,
       });
     }
   }
@@ -42,7 +40,7 @@ class MainButtons extends Component {
   tick() {
     this.setState(
       prevState => ({
-        currentSeconds: prevState.currentSeconds - 1
+        currentSeconds: prevState.currentSeconds - 1,
       }),
       () => {
         if (this.state.currentSeconds === 0) this.resetInterval();
@@ -74,7 +72,7 @@ class MainButtons extends Component {
           break;
       }
     } else {
-      if (e.which == 32) {
+      if (e.which === 32) {
         console.log('Go space');
         if (this.state.timerStatus === 'running') {
           this.onStopButtonPressed();
@@ -107,14 +105,14 @@ class MainButtons extends Component {
     if (this.state.timerStatus === 'running') return;
     this.restartInterval();
     this.setState({
-      timerStatus: 'running'
+      timerStatus: 'running',
     });
   };
 
   onPauseButtonPressed = () => {
     this.resetInterval();
     this.setState({
-      timerStatus: 'pause'
+      timerStatus: 'pause',
     });
   };
 
@@ -122,7 +120,7 @@ class MainButtons extends Component {
     if (this.state.timerStatus === 'running') return;
     this.restartInterval();
     this.setState({
-      timerStatus: 'running'
+      timerStatus: 'running',
     });
   };
 
@@ -130,7 +128,7 @@ class MainButtons extends Component {
     if (!this.state.timerRunning) return;
     this.resetInterval();
     this.setState({
-      timerStatus: 'pause'
+      timerStatus: 'pause',
     });
   };
 
@@ -138,7 +136,7 @@ class MainButtons extends Component {
     this.resetInterval();
     this.setState({
       timerStatus: 'init',
-      currentSeconds: this.props.seconds
+      currentSeconds: this.props.seconds,
     });
   };
 
@@ -221,7 +219,7 @@ class MainButtons extends Component {
 
 function mapStateToProps(state) {
   return {
-    seconds: state.pomodoro.seconds
+    seconds: state.pomodoro.seconds,
   };
 }
 
@@ -230,7 +228,7 @@ function mapDispatchToProps(dispatch) {
     {
       shortBreak: shortBreak,
       longBreak: longBreak,
-      defaultBreak: defaultBreak
+      defaultBreak: defaultBreak,
     },
     dispatch
   );

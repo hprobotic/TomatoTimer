@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Image } from 'semantic-ui-react';
-import {
-  Timer,
-  Quotes,
-  KeyboardShortcuts,
-  BreakTypes,
-  Sidebar,
-  Footer
-} from './components';
+import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components';
 import './App.css';
 
 class App extends Component {
@@ -29,7 +21,6 @@ class App extends Component {
           </div>
           <div className="item item-3">3</div>
           <div className="item item-4">
-            {/* <BreakTypes /> */}
             <Timer />
           </div>
           <div className="item item-5">5</div>
