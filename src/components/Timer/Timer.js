@@ -157,7 +157,7 @@ class MainButtons extends Component {
             className="circle-svg"
           >
             <circle
-              class="animate"
+              className="animate"
               id="path"
               cx="160"
               cy="160"
@@ -166,7 +166,7 @@ class MainButtons extends Component {
               fill="none"
               strokeWidth="4"
               strokeLinecap="round"
-              stroke-dashoffset={currentCircleProgress}
+              strokeDashoffset={currentCircleProgress}
             />
           </svg>
           <div className="countdown-circle" />
