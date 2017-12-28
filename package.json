@@ -29,7 +29,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write --trailing-comma  none",
+      "prettier --single-quote --write --trailing-comma none --no-semi false",
       "git add"
     ]
   }

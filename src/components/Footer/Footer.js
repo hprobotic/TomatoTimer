@@ -1,6 +1,5 @@
-import React from 'react';
-import { Input, Menu } from 'semantic-ui-react';
-import './Footer.css';
+import React from 'react'
+import './Footer.css'
 
 const Footer = () => (
   <div className="footer">
@@ -9,6 +8,6 @@ const Footer = () => (
       reserved.
     </p>
   </div>
-);
+)
 
-export default Footer;
+export default Footer

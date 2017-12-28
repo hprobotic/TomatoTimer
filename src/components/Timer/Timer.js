@@ -1,150 +1,150 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Grid, Button } from 'semantic-ui-react';
-import { defaultBreak, shortBreak, longBreak } from '../../actions';
-import './Timer.css';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Grid, Button } from 'semantic-ui-react'
+import { defaultBreak, shortBreak, longBreak } from '../../actions'
+import './Timer.css'
 
-const PROGRESS_CIRCUMFERENCE = 992.743278534;
+const PROGRESS_CIRCUMFERENCE = 992.743278534
 
 class MainButtons extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       timerRunning: false,
       currentSeconds: 1500,
-      timerStatus: 'init',
-    };
+      timerStatus: 'init'
+    }
   }
 
   componentWillMount() {
-    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+    document.addEventListener('keydown', this.handleKeyDown.bind(this))
   }
 
   componentDidMount() {
     this.setState({
-      currentSeconds: this.props.seconds,
-    });
+      currentSeconds: this.props.seconds
+    })
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+    console.log(nextProps)
     if (this.props.seconds !== nextProps.seconds) {
-      this.onResetButtonPressed();
+      this.onResetButtonPressed()
       this.setState({
-        currentSeconds: nextProps.seconds,
-      });
+        currentSeconds: nextProps.seconds
+      })
     }
   }
 
   tick() {
     this.setState(
       prevState => ({
-        currentSeconds: prevState.currentSeconds - 1,
+        currentSeconds: prevState.currentSeconds - 1
       }),
       () => {
-        if (this.state.currentSeconds === 0) this.resetInterval();
+        if (this.state.currentSeconds === 0) this.resetInterval()
       }
-    );
+    )
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    clearInterval(this.timerID)
   }
 
   handleKeyDown = e => {
     if (e.altKey) {
       switch (e.which) {
         case 80:
-          this.props.defaultBreak();
-          break;
+          this.props.defaultBreak()
+          break
         case 83:
-          console.log('hello');
-          this.props.shortBreak();
-          break;
+          console.log('hello')
+          this.props.shortBreak()
+          break
         case 76:
-          this.props.longBreak();
-          break;
+          this.props.longBreak()
+          break
         case 82:
-          this.onStopButtonPressed();
-          break;
+          this.onStopButtonPressed()
+          break
         default:
-          break;
+          break
       }
     } else {
       if (e.which === 32) {
-        console.log('Go space');
+        console.log('Go space')
         if (this.state.timerStatus === 'running') {
-          this.onStopButtonPressed();
+          this.onStopButtonPressed()
         } else {
-          this.onStartButtonPressed();
+          this.onStartButtonPressed()
         }
       }
     }
-  };
+  }
 
   resetInterval() {
-    clearInterval(this.timerID);
+    clearInterval(this.timerID)
   }
 
   restartInterval() {
-    clearInterval(this.timerID);
+    clearInterval(this.timerID)
     this.timerID = setInterval(() => {
-      this.tick();
-    }, 1000);
+      this.tick()
+    }, 1000)
   }
 
   format = seconds => {
-    let m = Math.floor((seconds % 3600) / 60);
-    let s = Math.floor((seconds % 3600) % 60);
-    let timeFormated = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-    return timeFormated;
-  };
+    let m = Math.floor((seconds % 3600) / 60)
+    let s = Math.floor((seconds % 3600) % 60)
+    let timeFormated = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s
+    return timeFormated
+  }
 
   onStartButtonPressed = () => {
-    if (this.state.timerStatus === 'running') return;
-    this.restartInterval();
+    if (this.state.timerStatus === 'running') return
+    this.restartInterval()
     this.setState({
-      timerStatus: 'running',
-    });
-  };
+      timerStatus: 'running'
+    })
+  }
 
   onPauseButtonPressed = () => {
-    this.resetInterval();
+    this.resetInterval()
     this.setState({
-      timerStatus: 'pause',
-    });
-  };
+      timerStatus: 'pause'
+    })
+  }
 
   onResumeButtonPressed = () => {
-    if (this.state.timerStatus === 'running') return;
-    this.restartInterval();
+    if (this.state.timerStatus === 'running') return
+    this.restartInterval()
     this.setState({
-      timerStatus: 'running',
-    });
-  };
+      timerStatus: 'running'
+    })
+  }
 
   onStopButtonPressed = () => {
-    if (!this.state.timerRunning) return;
-    this.resetInterval();
+    if (!this.state.timerRunning) return
+    this.resetInterval()
     this.setState({
-      timerStatus: 'pause',
-    });
-  };
+      timerStatus: 'pause'
+    })
+  }
 
   onResetButtonPressed = () => {
-    this.resetInterval();
+    this.resetInterval()
     this.setState({
       timerStatus: 'init',
-      currentSeconds: this.props.seconds,
-    });
-  };
+      currentSeconds: this.props.seconds
+    })
+  }
 
   render() {
-    const { timerStatus, currentSeconds } = this.state;
-    const isCounting = timerStatus === 'running';
+    const { timerStatus, currentSeconds } = this.state
+    const isCounting = timerStatus === 'running'
     const currentCircleProgress =
-      PROGRESS_CIRCUMFERENCE * currentSeconds / this.props.seconds;
+      PROGRESS_CIRCUMFERENCE * currentSeconds / this.props.seconds
     return (
       <div className="timer">
         <h1 className={`countdown ${isCounting ? 'animated' : 'stop'}`}>
@@ -213,14 +213,14 @@ class MainButtons extends Component {
           )}
         </Grid>
       </div>
-    );
+    )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    seconds: state.pomodoro.seconds,
-  };
+    seconds: state.pomodoro.seconds
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -228,10 +228,10 @@ function mapDispatchToProps(dispatch) {
     {
       shortBreak: shortBreak,
       longBreak: longBreak,
-      defaultBreak: defaultBreak,
+      defaultBreak: defaultBreak
     },
     dispatch
-  );
+  )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(MainButtons)

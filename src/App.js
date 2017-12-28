@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components';
-import './App.css';
+import React, { Component } from 'react'
+import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components'
+import './App.css'
 
 class App extends Component {
   render() {
@@ -30,8 +30,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
