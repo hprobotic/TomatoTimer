@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Firebase from 'firebase';
+import { init } from '../../src/javascripts/firebase';
 
 export const DEFAULT_USER = 'DEFAULT_USER';
 export const START_COUNTDOWN = 'START_COUNTDOWN';
@@ -10,7 +10,7 @@ export const SHORT_BREAK = 'SHORT_BREAK';
 export const LONG_BREAK = 'LONG_BREAK';
 export const DEFAULT_BREAK = 'DEFAULT_BREAK';
 export const SAVE_SETTING = 'SAVE_SETTING';
-const Users = new Firebase('https://tomato-timer-29c5d.firebaseio.com');
+// const Users = init('https://tomato-timer-29c5d.firebaseio.com');
 
 export function onTick(currentTime) {
   return {
@@ -21,7 +21,7 @@ export function onTick(currentTime) {
 
 export function getDefaultVal() {
   return dispatch => {
-    Users.on('value', snapshot => {
+    init.on('value', snapshot => {
       dispatch({
         type: DEFAULT_USER,
         payload: snapshot.val()

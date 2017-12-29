@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { init as firebaseInit } from '../src/javascripts/firebase';
 import { Grid, Image } from 'semantic-ui-react';
 import {
   Timer,
@@ -11,6 +12,11 @@ import {
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    firebaseInit();
+  }
+
   render() {
     return (
       <div className="App">
