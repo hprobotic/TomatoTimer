@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components'
 import './App.css'
-import React, { Component } from 'react';
-import { init as firebaseInit } from '../src/javascripts/firebase';
-import { Grid, Image } from 'semantic-ui-react';
-import './App.css';
+import { init as firebaseInit } from '../src/javascripts/firebase'
+import { Grid, Image } from 'semantic-ui-react'
+import './App.css'
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    firebaseInit();
+    super(props)
+    firebaseInit()
   }
 
   render() {
