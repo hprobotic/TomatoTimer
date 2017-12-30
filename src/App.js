@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components'
+import {
+  Timer,
+  Quotes,
+  KeyboardShortcuts,
+  Sidebar,
+  Chart,
+  Setting
+} from './components'
 import './App.css'
 import { Grid, Image } from 'semantic-ui-react'
 import './App.css'
@@ -23,7 +30,10 @@ class App extends Component {
             </div>
           </div>
           <div className="item item-2">
-            <Sidebar />
+            <Sidebar>
+              <Chart name="Chart" visibility="hidden" />
+              <Setting name="Setting" />
+            </Sidebar>
           </div>
           <div className="item item-3">3</div>
           <div className="item item-4">
