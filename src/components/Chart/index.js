@@ -5,6 +5,8 @@ import {
 } from 'recharts';
 import { scaleOrdinal, schemeCategory10 } from 'd3-scale';
 import _ from 'lodash';
+import {Label} from 'semantic-ui-react';
+import './Chart.css'
 
 const randomChangeArray = (array) => {
 
@@ -44,10 +46,11 @@ export default class extends React.Component {
     return (
       <div>
         <BarChart width={300} height={400} data={data}>
-          <Bar dataKey='hour' fill='#8884d8' />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <Bar dataKey='hour' fill='#FF0000' />
+          <XAxis dataKey="name" fill='#FF0000' label={{ fill: '#444', position: 'insideStart' }}/>
+          <YAxis/>
         </BarChart>
+        <Label color = "red"> Weekly Average : 10 </Label>
       </div>
     )
   }

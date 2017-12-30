@@ -14,15 +14,17 @@ class Sidebar extends React.Component {
   }
 
   showChartMenu() {
+    const visible = this.state.showItem == 'Setting' && this.state.visible ? true : !this.state.visible
     this.setState({
-      visible: !this.state.visible,
+      visible: visible,
       showItem: 'Chart',
     })
   }
 
   showSettingMenu() {
+    const visible = this.state.showItem == 'Chart' && this.state.visible ? true : !this.state.visible
     this.setState({
-      visible: !this.state.visible,
+      visible: visible,
       showItem: 'Setting',
     })
   }
