@@ -25,12 +25,12 @@ class MainButtons extends Component {
   componentWillMount() {
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
     let users = fire.database().ref('users')
-    console.log(`Users: ${users}`)
+    // console.log(`Users: ${users}`)
     users.once('value', snapshot => {
-      console.log(typeof snapshot.node_.value_)
-      // _.forEach(snapshot.val(), function (user) {
-      //   console.log(`User: ${user}`);
-      // })
+      console.log(snapshot.val())
+      this.setState({
+        currentSeconds: snapshot.val().settings.pomodoro * 60
+      })
     })
   }
 
