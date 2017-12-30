@@ -2,7 +2,7 @@ import React from 'react';
 import './Quotes.css';
 
 
-const QUOTE_URL = `http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1`
+const QUOTE_URL = `https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1`
 const TIME_UPDATE_QUOTE = 1000 * 10
 
 class Quotes extends React.Component {
@@ -20,9 +20,6 @@ class Quotes extends React.Component {
       fetch(QUOTE_URL)
       .then((data) => data.json())
       .then((json) => {
-        console.log(json);
-        // json[0].content = json[0].content.replace('<p>','')
-        // json[0].content = json[0].content.replace('</p>','')
         self.setState({
           content: json[0].content,
           title: json[0].title
