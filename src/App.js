@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components'
+import { Timer, Quotes, KeyboardShortcuts, Sidebar, Chart, Setting} from './components'
 import './App.css'
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="random-bg" />
-        <div className="grid-container">
+        <div className="grid-container" >
           <div className="item item-1">
             <div className="logo">
               <span className="title">Tomato Timer</span>
@@ -17,7 +17,10 @@ class App extends Component {
             </div>
           </div>
           <div className="item item-2">
-            <Sidebar />
+            <Sidebar>
+              <Chart name = "Chart" visibility = 'hidden'/>
+              <Setting name = "Setting" />
+            </Sidebar>
           </div>
           <div className="item item-3">3</div>
           <div className="item item-4">
