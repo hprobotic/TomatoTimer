@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import axious from 'axios'
+import fire from '../../javascripts/firebase'
+import _ from 'lodash'
+
 import { connect } from 'react-redux'
 import { Grid, Button } from 'semantic-ui-react'
 import { defaultBreak, shortBreak, longBreak } from '../../actions'
@@ -15,13 +18,20 @@ class MainButtons extends Component {
       timerRunning: false,
       // ajax fetch default user value here
       currentSeconds: 1500,
-      currrentMinute: axious.get(''),
       timerStatus: 'init'
     }
   }
 
   componentWillMount() {
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
+    let users = fire.database().ref('users')
+    console.log(`Users: ${users}`)
+    users.once('value', snapshot => {
+      console.log(typeof snapshot.node_.value_)
+      // _.forEach(snapshot.val(), function (user) {
+      //   console.log(`User: ${user}`);
+      // })
+    })
   }
 
   componentDidMount() {

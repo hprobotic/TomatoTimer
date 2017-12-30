@@ -1,15 +1,14 @@
-import _ from 'lodash';
-import { init } from '../../src/javascripts/firebase';
+import _ from 'lodash'
 
-export const DEFAULT_USER = 'DEFAULT_USER';
-export const START_COUNTDOWN = 'START_COUNTDOWN';
-export const STOP_COUNTDOWN = 'STOP_COUNTDOWN';
-export const RESET_COUNTDOWN = 'RESET_COUNTDOWN';
-export const ON_TICK = 'ON_TICK';
-export const SHORT_BREAK = 'SHORT_BREAK';
-export const LONG_BREAK = 'LONG_BREAK';
-export const DEFAULT_BREAK = 'DEFAULT_BREAK';
-export const SAVE_SETTING = 'SAVE_SETTING';
+export const DEFAULT_USER = 'DEFAULT_USER'
+export const START_COUNTDOWN = 'START_COUNTDOWN'
+export const STOP_COUNTDOWN = 'STOP_COUNTDOWN'
+export const RESET_COUNTDOWN = 'RESET_COUNTDOWN'
+export const ON_TICK = 'ON_TICK'
+export const SHORT_BREAK = 'SHORT_BREAK'
+export const LONG_BREAK = 'LONG_BREAK'
+export const DEFAULT_BREAK = 'DEFAULT_BREAK'
+export const SAVE_SETTING = 'SAVE_SETTING'
 // const Users = init('https://tomato-timer-29c5d.firebaseio.com');
 
 export function onTick(currentTime) {
@@ -19,28 +18,28 @@ export function onTick(currentTime) {
   }
 }
 
-export function getDefaultVal() {
-  return dispatch => {
-    init.on('value', snapshot => {
-      dispatch({
-        type: DEFAULT_USER,
-        payload: snapshot.val()
-      });
-    });
-  };
-}
+// export function getDefaultVal() {
+//   return dispatch => {
+//     init.on('value', snapshot => {
+//       dispatch({
+//         type: DEFAULT_USER,
+//         payload: snapshot.val()
+//       });
+//     });
+//   };
+// }
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
-  alert('saving setting to local storage...');
-  localStorage.setItem('pomodoro', pomodoro * 60);
-  localStorage.setItem('shortbreak', shortbreak * 60);
-  localStorage.setItem('longbreak', longbreak * 60);
+  alert('saving setting to local storage...')
+  localStorage.setItem('pomodoro', pomodoro * 60)
+  localStorage.setItem('shortbreak', shortbreak * 60)
+  localStorage.setItem('longbreak', longbreak * 60)
   return {
     type: SAVE_SETTING,
     pomodoro: localStorage.getItem('pomodoro'),
     shortbreak: localStorage.getItem('shortbreak'),
     longbreak: localStorage.getItem('longbreak')
-  };
+  }
 }
 
 export function startCountdown() {
