@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
-import Setting from '../../containers/Setting';
+import React from 'react'
+import { Button, Icon } from 'semantic-ui-react'
+import Setting from '../../containers/Setting'
 
 const Sidebar = () => (
   <div>

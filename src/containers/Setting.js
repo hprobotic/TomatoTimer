@@ -1,25 +1,24 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react';
-import { saveSetting } from '../actions/index';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
+import { saveSetting } from '../actions/index'
 
 class Setting extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      open: true,
       pomodoro: 25,
       shortbreak: 5,
       longbreak: 10
-    };
-    this.handleSave = this.handleSave.bind(this);
+    }
+    this.handleSave = this.handleSave.bind(this)
   }
 
   handleSave(pomodoro, shortbreak, longbreak, closeModal) {
-    this.props.saveSetting(pomodoro, shortbreak, longbreak);
-    this.props.saveSetting;
-    closeModal();
+    this.props.saveSetting(pomodoro, shortbreak, longbreak)
+    this.props.saveSetting
+    closeModal()
   }
 
   // handleChange(event, type) {
@@ -47,7 +46,7 @@ class Setting extends Component {
                 <Input
                   value={this.state.pomodoro}
                   onChange={event => {
-                    this.setState({ pomodoro: event.target.value });
+                    this.setState({ pomodoro: event.target.value })
                   }}
                   id="time_pomodoro"
                   type="number"
@@ -59,7 +58,7 @@ class Setting extends Component {
                 <Input
                   value={this.state.shortbreak}
                   onChange={event => {
-                    this.setState({ shortbreak: event.target.value });
+                    this.setState({ shortbreak: event.target.value })
                   }}
                   id="time_shortbreak"
                   type="number"
@@ -71,7 +70,7 @@ class Setting extends Component {
                 <Input
                   value={this.state.longbreak}
                   onChange={event => {
-                    this.setState({ longbreak: event.target.value });
+                    this.setState({ longbreak: event.target.value })
                   }}
                   id="time_longbreak"
                   type="number"
@@ -97,7 +96,7 @@ class Setting extends Component {
                 this.state.shortbreak,
                 this.state.longbreak,
                 this.props.close
-              );
+              )
             }}
             //      onClick={this.props.close}
           >
@@ -106,7 +105,7 @@ class Setting extends Component {
           </Button>
         </Modal.Actions>
       </Modal>
-    );
+    )
   }
 }
 
@@ -118,9 +117,9 @@ function mapDispatchToProps(dispatch) {
       saveSetting: saveSetting
     },
     dispatch
-  );
+  )
 }
 
 // Promote MainButtons from a component to a container - it needs to know about
 // this new dispatch method, countDown. Make it available as a prop.
-export default connect(null, mapDispatchToProps)(Setting);
+export default connect(null, mapDispatchToProps)(Setting)
