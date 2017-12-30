@@ -1,24 +1,26 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
+import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
 import { saveSetting } from '../../actions/index'
+import Authentication from '../Authentication/index'
 import './Setting.css'
 
 class Setting extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pomodoro: 25,
-      shortbreak: 5,
-      longbreak: 10
+      pomodoro: localStorage.getItem('pomodoro') / 60 || 25,
+      shortbreak: localStorage.getItem('shortbreak') / 60 || 5,
+      longbreak: localStorage.getItem('longbreak') / 60 || 10
     }
+
     this.handleSave = this.handleSave.bind(this)
   }
 
   handleSave(pomodoro, shortbreak, longbreak, closeModal) {
+    console.log('clicked!!!!')
     this.props.saveSetting(pomodoro, shortbreak, longbreak)
-    this.props.saveSetting
   }
 
   // handleChange(event, type) {
@@ -66,6 +68,7 @@ class Setting extends Component {
           size="mini"
           label="Long Break"
         />
+        <br />
         <Button
           color="green"
           onClick={() => {
@@ -77,9 +80,9 @@ class Setting extends Component {
             )
           }}
         >
-          {' '}
           Save Setting
         </Button>
+        <Authentication />
       </div>
     )
   }

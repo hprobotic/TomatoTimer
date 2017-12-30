@@ -3,7 +3,8 @@ import {
   ON_TICK,
   SHORT_BREAK,
   LONG_BREAK,
-  DEFAULT_BREAK
+  DEFAULT_BREAK,
+  SAVE_SETTING
 } from '../actions'
 
 const DEFAULT_BREAK_SECS = 1500
@@ -34,6 +35,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         seconds: LONG_BREAK_SECS
+      }
+    case SAVE_SETTING:
+      return {
+        ...state,
+        seconds: action.seconds
       }
     default:
       return state

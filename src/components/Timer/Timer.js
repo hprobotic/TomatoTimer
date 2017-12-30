@@ -16,7 +16,6 @@ class MainButtons extends Component {
     super(props)
     this.state = {
       timerRunning: false,
-      // ajax fetch default user value here
       currentSeconds: 1500,
       timerStatus: 'init'
     }
@@ -24,14 +23,14 @@ class MainButtons extends Component {
 
   componentWillMount() {
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
-    let users = fire.database().ref('users')
-    // console.log(`Users: ${users}`)
-    users.once('value', snapshot => {
-      console.log(snapshot.val())
-      this.setState({
-        currentSeconds: snapshot.val().settings.pomodoro * 60
-      })
-    })
+    // let users = fire.database().ref('users')
+    // // console.log(`Users: ${users}`)
+    // users.once('value', snapshot => {
+    //   console.log(snapshot.val())
+    //   this.setState({
+    //     currentSeconds: snapshot.val().settings.pomodoro * 60
+    //   })
+    // })
   }
 
   componentDidMount() {
@@ -41,7 +40,7 @@ class MainButtons extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
+    // console.log(nextProps)
     if (this.props.seconds !== nextProps.seconds) {
       this.onResetButtonPressed()
       this.setState({
@@ -72,7 +71,7 @@ class MainButtons extends Component {
           this.props.defaultBreak()
           break
         case 83:
-          console.log('hello')
+          // console.log('hello')
           this.props.shortBreak()
           break
         case 76:

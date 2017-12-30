@@ -10,6 +10,7 @@ import * as reducers from './reducers'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 import './index.css'
+import fire from './javascripts/firebase'
 
 const config = {
   key: 'root',
@@ -25,6 +26,14 @@ let store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 let persistor = persistStore(store)
+
+fire.auth().onAuthStateChanged(user => {
+  if (user) {
+    console.log('user has just signed up')
+  } else {
+    console.log('user has signed out or needs to login')
+  }
+})
 
 ReactDOM.render(
   <PersistGate persistor={persistor}>

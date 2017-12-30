@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { Button } from 'semantic-ui-react'
 import './Sidebar.css'
+import Setting from '../../components/Setting/index'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -40,18 +41,18 @@ class Sidebar extends React.Component {
     const child = self.props.children.filter(function(ele) {
       return ele.props.name === self.state.showItem
     })
-    _.first(child) ? console.log(_.first(child).props) : ''
     return (
       <div>
         <div className="button">
-          <Button
+          {/* <Button
             circular
             floated="right"
             icon="settings"
             size="big"
             basic
             onClick={self.showSettingMenu.bind(self)}
-          />
+          /> */}
+          <Setting />
           <Button
             circular
             floated="right"

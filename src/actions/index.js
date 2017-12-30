@@ -9,7 +9,6 @@ export const SHORT_BREAK = 'SHORT_BREAK'
 export const LONG_BREAK = 'LONG_BREAK'
 export const DEFAULT_BREAK = 'DEFAULT_BREAK'
 export const SAVE_SETTING = 'SAVE_SETTING'
-// const Users = init('https://tomato-timer-29c5d.firebaseio.com');
 
 export function onTick(currentTime) {
   return {
@@ -30,15 +29,14 @@ export function onTick(currentTime) {
 // }
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
-  alert('saving setting to local storage...')
   localStorage.setItem('pomodoro', pomodoro * 60)
   localStorage.setItem('shortbreak', shortbreak * 60)
   localStorage.setItem('longbreak', longbreak * 60)
   return {
     type: SAVE_SETTING,
-    pomodoro: localStorage.getItem('pomodoro'),
-    shortbreak: localStorage.getItem('shortbreak'),
-    longbreak: localStorage.getItem('longbreak')
+    seconds: localStorage.getItem('pomodoro')
+    // shortbreak: localStorage.getItem('shortbreak'),
+    // longbreak: localStorage.getItem('longbreak')
   }
 }
 

@@ -16,7 +16,7 @@ import {
 } from 'recharts'
 import { scaleOrdinal, schemeCategory10 } from 'd3-scale'
 import _ from 'lodash'
-import { Label } from 'semantic-ui-react'
+import { Button, Label } from 'semantic-ui-react'
 import './Chart.css'
 
 const randomChangeArray = array => {}
