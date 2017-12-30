@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
+import axious from 'axios'
 import { connect } from 'react-redux'
 import { Grid, Button } from 'semantic-ui-react'
 import { defaultBreak, shortBreak, longBreak } from '../../actions'
@@ -12,7 +13,9 @@ class MainButtons extends Component {
     super(props)
     this.state = {
       timerRunning: false,
+      // ajax fetch default user value here
       currentSeconds: 1500,
+      currrentMinute: axious.get(''),
       timerStatus: 'init'
     }
   }
