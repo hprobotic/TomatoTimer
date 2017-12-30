@@ -101,8 +101,7 @@ class MainButtons extends Component {
     return timeFormated
   }
 
-  onStartButtonPressed = (e) => {
-    e.preventDefault();
+  onStartButtonPressed = () => {
     if (this.state.timerStatus === 'running') return
     this.restartInterval()
     this.setState({
@@ -110,16 +109,14 @@ class MainButtons extends Component {
     })
   }
 
-  onPauseButtonPressed = (e) => {
-    e.preventDefault();
+  onPauseButtonPressed = () => {
     this.resetInterval()
     this.setState({
       timerStatus: 'pause'
     })
   }
 
-  onResumeButtonPressed = (e) => {
-    e.preventDefault();
+  onResumeButtonPressed = () => {
     if (this.state.timerStatus === 'running') return
     this.restartInterval()
     this.setState({
@@ -127,8 +124,7 @@ class MainButtons extends Component {
     })
   }
 
-  onStopButtonPressed = (e) => {
-    e.preventDefault();
+  onStopButtonPressed = () => {
     if (!this.state.timerRunning) return
     this.resetInterval()
     this.setState({
@@ -136,8 +132,7 @@ class MainButtons extends Component {
     })
   }
 
-  onResetButtonPressed = (e) => {
-    e.preventDefault();
+  onResetButtonPressed = () => {
     this.resetInterval()
     this.setState({
       timerStatus: 'init',
@@ -183,7 +178,7 @@ class MainButtons extends Component {
             <Button
               size="huge"
               color="green"
-              onClick={(e) => this.onStartButtonPressed(e)}
+              onClick={() => this.onStartButtonPressed()}
             >
               Start
             </Button>
@@ -193,7 +188,7 @@ class MainButtons extends Component {
               basic
               size="huge"
               inverted
-              onClick={(e) => this.onPauseButtonPressed(e)}
+              onClick={() => this.onPauseButtonPressed()}
             >
               Pause
             </Button>
@@ -202,7 +197,7 @@ class MainButtons extends Component {
             <Button
               size="huge"
               color="red"
-              onClick={(e) => this.onResumeButtonPressed(e)}
+              onClick={() => this.onResumeButtonPressed()}
             >
               Resume
             </Button>
