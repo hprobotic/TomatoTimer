@@ -27,9 +27,13 @@ let store = createStore(
 let persistor = persistStore(store)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <PersistGate persistor={persistor}>
+    <Provider store={store}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Provider>
+  </PersistGate>,
   document.getElementById('root')
 )
 registerServiceWorker()
