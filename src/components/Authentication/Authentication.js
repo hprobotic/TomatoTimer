@@ -15,7 +15,6 @@ class Authentication extends Component {
   }
 
   signupFirebase() {
-    alert('ahihi...')
     const { email, password } = this.state
     fire
       .auth()
@@ -28,7 +27,13 @@ class Authentication extends Component {
   }
 
   loginFirebase() {
-    alert('ahihi...')
+    const { email, password } = this.state
+    fire
+      .auth()
+      .signInAndRetrieveDataWithEmailAndPassword(email, password)
+      .catch(error => {
+        console.log(`Error: ${error}`)
+      })
     this.close()
   }
 
@@ -36,6 +41,16 @@ class Authentication extends Component {
   close = () => this.setState({ open: false })
 
   render() {
+    fire.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(
+          'Account has been created successfully or user is logged in'
+        )
+      } else {
+        console.log('user has signed out or needs to login')
+      }
+    })
+
     const { open, dimmer } = this.state
 
     return (
