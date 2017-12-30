@@ -32,7 +32,7 @@ class App extends Component {
           <div className="item item-2">
             <Sidebar>
               <Chart name="Chart" visibility="hidden" />
-              <Setting name="Setting" />
+              <Setting name="Setting" visibility="hidden" />
             </Sidebar>
           </div>
           <div className="item item-3">3</div>

@@ -1,14 +1,5 @@
 import React from 'react'
-// import { Button, Icon } from 'semantic-ui-react'
-// import Setting from '../../containers/Setting'
-
-// const Sidebar = () => (
-//   <div>
-//     <Setting />
-//     {/* <Button circular floated="right" icon="settings" size="big" basic /> */}
-//     <Button circular floated="right" icon="bar chart" size="big" basic />
-//   </div>
-// )
+import _ from 'lodash'
 import { Button } from 'semantic-ui-react'
 import './Sidebar.css'
 
@@ -23,7 +14,7 @@ class Sidebar extends React.Component {
 
   showChartMenu() {
     const visible =
-      this.state.showItem == 'Setting' && this.state.visible
+      this.state.showItem === 'Setting' && this.state.visible
         ? true
         : !this.state.visible
     this.setState({
@@ -34,7 +25,7 @@ class Sidebar extends React.Component {
 
   showSettingMenu() {
     const visible =
-      this.state.showItem == 'Chart' && this.state.visible
+      this.state.showItem === 'Chart' && this.state.visible
         ? true
         : !this.state.visible
     this.setState({
@@ -47,8 +38,9 @@ class Sidebar extends React.Component {
     let self = this
     const className = self.state.visible ? 'menuShow' : 'menuHide'
     const child = self.props.children.filter(function(ele) {
-      return ele.props.name == self.state.showItem
+      return ele.props.name === self.state.showItem
     })
+    _.first(child) ? console.log(_.first(child).props) : ''
     return (
       <div>
         <div className="button">
