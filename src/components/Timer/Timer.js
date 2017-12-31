@@ -231,7 +231,7 @@ class MainButtons extends Component {
 
 function mapStateToProps(state) {
   return {
-    seconds: state.pomodoro.seconds
+    seconds: state.user.user.settings.pomodoro
   }
 }
 

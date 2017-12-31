@@ -1,23 +1,29 @@
+import { SIGNUP_SUCCESS, LOGIN, LOGOUT, SIGNUP_FAILURE } from '../actions/index'
+
 const initialState = {
+  login: false,
   user: {
     info: {
-      email: 'hprobotic@gmail.com',
-      token: 'hello'
-    },
-    focusData: {
-      count: 10,
-      hours: 100
+      email: '',
+      token: ''
     },
     settings: {
-      pomodoro: 25,
-      shortBreak: 5,
-      longBreak: 10
+      pomodoro: localStorage.getItem('pomodoro') || 25,
+      shortBreak: localStorage.getItem('shortBreak') || 5,
+      longBreak: localStorage.getItem('longBreak') || 10
     }
   }
-};
+}
 
 export default function(state = initialState, action) {
-  return {
-    state
-  };
+  switch (action.type) {
+    case SIGNUP_SUCCESS:
+      console.log('Sign up successfully')
+      return {
+        user: action.user,
+        login: true
+      }
+    default:
+      return state
+  }
 }

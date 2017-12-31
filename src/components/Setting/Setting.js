@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
-import { saveSetting } from '../../actions/index'
+import { saveSetting, signUp } from '../../actions/index'
 import Authentication from '../Authentication/index'
 import './Setting.css'
 
@@ -30,6 +30,16 @@ class Setting extends Component {
   // }
 
   render() {
+    const logout = this.props.login ? (
+      <Button
+        color="gray"
+        onClick={() => {
+          alert('ahihi...')
+        }}
+      >
+        Logout
+      </Button>
+    ) : null
     return (
       <div>
         <Input
@@ -82,18 +92,33 @@ class Setting extends Component {
         >
           Save Setting
         </Button>
-        <Authentication />
+        <Authentication
+          login={this.props.login}
+          signUp={this.props.signUp}
+          pomodoro={this.props.pomodoro}
+          shortBreak={this.props.shortBreak}
+          longBreak={this.props.longBreak}
+        />
+        {logout}
       </div>
     )
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    login: state.login,
+    pomodoro: state.user.user.settings.pomodoro,
+    shortBreak: state.user.user.settings.shortBreak,
+    longBreak: state.user.user.settings.longBreak
+  }
+}
+
 function mapDispatchToProps(dispatch) {
-  // Whenever countDown is called, the result should be passed to all of our
-  // reducers
   return bindActionCreators(
     {
-      saveSetting: saveSetting
+      saveSetting: saveSetting,
+      signUp: signUp
     },
     dispatch
   )
@@ -101,4 +126,4 @@ function mapDispatchToProps(dispatch) {
 
 // Promote MainButtons from a component to a container - it needs to know about
 // this new dispatch method, countDown. Make it available as a prop.
-export default connect(null, mapDispatchToProps)(Setting)
+export default connect(mapStateToProps, mapDispatchToProps)(Setting)

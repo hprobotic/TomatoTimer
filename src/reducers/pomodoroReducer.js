@@ -18,7 +18,6 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ON_TICK:
-      console.log('just went through case ON_TICK...')
       return {
         ...state,
         seconds: action.seconds
@@ -26,7 +25,6 @@ export default function(state = initialState, action) {
     case (RESET_COUNTDOWN, DEFAULT_BREAK):
       return initialState
     case SHORT_BREAK:
-      console.log('STATE: ', state)
       return {
         ...state,
         seconds: SHORT_BREAK_SECS

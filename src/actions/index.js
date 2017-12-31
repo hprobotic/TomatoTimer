@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import fire from '../javascripts/firebase'
 
 export const DEFAULT_USER = 'DEFAULT_USER'
 export const START_COUNTDOWN = 'START_COUNTDOWN'
@@ -9,6 +10,10 @@ export const SHORT_BREAK = 'SHORT_BREAK'
 export const LONG_BREAK = 'LONG_BREAK'
 export const DEFAULT_BREAK = 'DEFAULT_BREAK'
 export const SAVE_SETTING = 'SAVE_SETTING'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 
 export function onTick(currentTime) {
   return {
@@ -79,3 +84,65 @@ export function longBreak() {
     type: LONG_BREAK
   }
 }
+
+export function signUp(email, password, pomodoro, shortBreak, longBreak) {
+  console.log('Inside of function signup')
+  return dispatch => {
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(obj => {
+        console.log('inside function then')
+        let database = fire.database()
+        database.ref('users').push({
+          info: {
+            email: obj.email,
+            token: obj.refreshToken
+          },
+          settings: {
+            pomodoro: pomodoro,
+            shortBreak: shortBreak,
+            longBreak: longBreak
+          }
+        })
+        dispatch({
+          type: SIGNUP_SUCCESS,
+          user: {
+            info: {
+              email: obj.email,
+              token: obj.refreshToken
+            },
+            settings: {
+              pomodoro: pomodoro,
+              shortBreak: shortBreak,
+              longBreak: longBreak
+            }
+          }
+        })
+      })
+      .catch(error => {
+        console.log(`Error: ${error}`)
+        dispatch({
+          type: SIGNUP_FAILURE,
+          message: error
+        })
+      })
+  }
+}
+
+export function logIn(email, password) {
+  return {
+    type: LOGIN,
+    user: fire
+      .auth()
+      .signInAndRetrieveDataWithEmailAndPassword(email, password)
+      .then(obj => {
+        console.log(obj)
+      })
+      .catch(error => {
+        console.log(`Error: ${error}`)
+      })
+  }
+}
+
+export function logOut() {}
