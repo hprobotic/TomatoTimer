@@ -85,7 +85,6 @@ class MainButtons extends Component {
       }
     } else {
       if (e.which === 32) {
-        console.log('Go space')
         if (this.state.timerStatus === 'running') {
           this.onStopButtonPressed()
         } else {
