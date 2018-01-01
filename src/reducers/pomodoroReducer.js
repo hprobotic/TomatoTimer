@@ -7,7 +7,7 @@ import {
   SAVE_SETTING
 } from '../actions'
 
-const DEFAULT_BREAK_SECS = localStorage.getItem('pomodoro') || 1500
+const DEFAULT_BREAK_SECS = localStorage.getItem('pomodoro') * 60 || 1500
 const SHORT_BREAK_SECS = 300
 const LONG_BREAK_SECS = 600
 
@@ -27,17 +27,17 @@ export default function(state = initialState, action) {
     case SHORT_BREAK:
       return {
         ...state,
-        seconds: localStorage.getItem('shortBreak') || SHORT_BREAK_SECS
+        seconds: localStorage.getItem('shortBreak') * 60 || SHORT_BREAK_SECS
       }
     case LONG_BREAK:
       return {
         ...state,
-        seconds: localStorage.getItem('longBreak') || LONG_BREAK_SECS
+        seconds: localStorage.getItem('longBreak') * 60 || LONG_BREAK_SECS
       }
     case SAVE_SETTING:
       return {
         ...state,
-        seconds: action.seconds
+        seconds: action.seconds * 60
       }
     default:
       return state

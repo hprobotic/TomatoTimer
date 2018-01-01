@@ -9,10 +9,11 @@ import './Setting.css'
 class Setting extends Component {
   constructor(props) {
     super(props)
+    console.log(this.props.pomodoro)
     this.state = {
-      pomodoro: localStorage.getItem('pomodoro') / 60 || 25,
-      shortbreak: localStorage.getItem('shortbreak') / 60 || 5,
-      longbreak: localStorage.getItem('longbreak') / 60 || 10
+      pomodoro: this.props.pomodoro,
+      shortbreak: this.props.shortBreak,
+      longbreak: this.props.shortBreak
     }
 
     this.handleSave = this.handleSave.bind(this)

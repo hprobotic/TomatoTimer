@@ -17,9 +17,9 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGOUT_SUCCESS = 'LOGOUT'
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
-  localStorage.setItem('pomodoro', pomodoro * 60)
-  localStorage.setItem('shortBreak', shortbreak * 60)
-  localStorage.setItem('longBreak', longbreak * 60)
+  localStorage.setItem('pomodoro', pomodoro)
+  localStorage.setItem('shortBreak', shortbreak)
+  localStorage.setItem('longBreak', longbreak)
   return {
     type: SAVE_SETTING,
     seconds: localStorage.getItem('pomodoro')

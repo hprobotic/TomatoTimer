@@ -23,15 +23,15 @@ export default function(state = initialState, action) {
     case SIGNUP_SUCCESS:
       console.log('Sign up successfully')
       return {
-        user: action.user,
-        login: true
+        login: true,
+        user: action.user
       }
     case LOGIN_SUCCESS:
       console.log('Log in successfully')
       console.log(action.user)
       return {
-        user: action.user,
-        login: true
+        login: true,
+        user: action.user
       }
     default:
       return state
