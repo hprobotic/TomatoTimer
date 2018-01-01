@@ -1,9 +1,10 @@
 import {
   SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT,
-  SIGNUP_FAILURE
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE
 } from '../actions/index'
 
 const initialState = {
@@ -32,6 +33,12 @@ export default function(state = initialState, action) {
       return {
         login: true,
         user: action.user
+      }
+    case LOGOUT_SUCCESS:
+      console.log('Log out successfully')
+      return {
+        ...state,
+        login: false
       }
     default:
       return state

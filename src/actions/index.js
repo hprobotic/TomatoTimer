@@ -14,7 +14,8 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
-export const LOGOUT_SUCCESS = 'LOGOUT'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
   localStorage.setItem('pomodoro', pomodoro)
@@ -147,4 +148,23 @@ export function logIn(email, password) {
   }
 }
 
-export function logOut() {}
+export function logOut() {
+  console.log('Inside of function logout')
+  return dispatch => {
+    fire
+      .auth()
+      .signOut()
+      .then(function() {
+        dispatch({
+          type: LOGOUT_SUCCESS
+        })
+      })
+      .catch(function(error) {
+        console.log(error)
+        dispatch({
+          type: LOGOUT_FAILURE,
+          user: {}
+        })
+      })
+  }
+}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
-import { saveSetting, signUp, logIn } from '../../actions/index'
+import { saveSetting, signUp, logIn, logOut } from '../../actions/index'
 import Authentication from '../Authentication/index'
 import './Setting.css'
 
@@ -31,11 +31,12 @@ class Setting extends Component {
   // }
 
   render() {
+    console.log(this.props.login)
     const logout = this.props.login ? (
       <Button
         color="gray"
         onClick={() => {
-          alert('ahihi...')
+          this.props.logOut()
         }}
       >
         Logout
@@ -108,7 +109,7 @@ class Setting extends Component {
 
 function mapStateToProps(state) {
   return {
-    login: state.login,
+    login: state.user.login,
     pomodoro: state.user.user.settings.pomodoro,
     shortBreak: state.user.user.settings.shortBreak,
     longBreak: state.user.user.settings.longBreak
@@ -120,7 +121,8 @@ function mapDispatchToProps(dispatch) {
     {
       saveSetting: saveSetting,
       signUp: signUp,
-      logIn: logIn
+      logIn: logIn,
+      logOut: logOut
     },
     dispatch
   )
