@@ -107,7 +107,7 @@ export function signUp(email, password, pomodoro, shortBreak, longBreak) {
 
 export function logIn(email, password) {
   console.log('Inside of function login')
-  return dispatch => {
+  return (dispatch, getState) => {
     fire
       .auth()
       .signInAndRetrieveDataWithEmailAndPassword(email, password)
@@ -123,9 +123,15 @@ export function logIn(email, password) {
           })
           .then(
             snapshot => {
+              let user = _.first(_.values(snapshot.val()))
+              let settings = user.settings
+              getState().pomodoro.seconds = settings.pomodoro * 60
+              localStorage.setItem('pomodoro', settings.pomodoro)
+              localStorage.setItem('shortBreak', settings.shortBreak)
+              localStorage.setItem('longBreak', settings.longBreak)
               dispatch({
                 type: LOGIN_SUCCESS,
-                user: _.first(_.values(snapshot.val()))
+                user: user
               })
             },
             error => console.log(error)

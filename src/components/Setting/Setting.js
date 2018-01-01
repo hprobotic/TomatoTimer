@@ -10,11 +10,11 @@ class Setting extends Component {
   constructor(props) {
     super(props)
     console.log(this.props.pomodoro)
-    this.state = {
-      pomodoro: this.props.pomodoro,
-      shortbreak: this.props.shortBreak,
-      longbreak: this.props.shortBreak
-    }
+    // this.state = {
+    //   pomodoro: this.props.pomodoro,
+    //   shortbreak: this.props.shortBreak,
+    //   longbreak: this.props.shortBreak
+    // }
 
     this.handleSave = this.handleSave.bind(this)
   }
@@ -44,7 +44,7 @@ class Setting extends Component {
     return (
       <div>
         <Input
-          value={this.state.pomodoro}
+          value={this.props.pomodoro}
           onChange={event => {
             this.setState({ pomodoro: event.target.value })
           }}
@@ -56,7 +56,7 @@ class Setting extends Component {
           label="Pomodoro"
         />
         <Input
-          value={this.state.shortbreak}
+          value={this.props.shortBreak}
           onChange={event => {
             this.setState({ shortbreak: event.target.value })
           }}
@@ -68,7 +68,7 @@ class Setting extends Component {
           label="Short Break"
         />
         <Input
-          value={this.state.longbreak}
+          value={this.props.longBreak}
           onChange={event => {
             this.setState({ longbreak: event.target.value })
           }}
