@@ -7,7 +7,7 @@ import {
   SAVE_SETTING
 } from '../actions'
 
-const DEFAULT_BREAK_SECS = 2100
+const DEFAULT_BREAK_SECS = localStorage.getItem('pomodoro') || 1500
 const SHORT_BREAK_SECS = 300
 const LONG_BREAK_SECS = 600
 
@@ -40,7 +40,7 @@ export default function(state = initialState, action) {
         seconds: action.seconds
       }
     default:
-      console.log('persist pomodoro reducer')
+      console.log('pomodoro reducer: ')
       console.log(state)
       return state
   }

@@ -35,8 +35,8 @@ export function onTick(currentTime) {
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
   localStorage.setItem('pomodoro', pomodoro * 60)
-  localStorage.setItem('shortbreak', shortbreak * 60)
-  localStorage.setItem('longbreak', longbreak * 60)
+  localStorage.setItem('shortBreak', shortbreak * 60)
+  localStorage.setItem('longBreak', longbreak * 60)
   return {
     type: SAVE_SETTING,
     seconds: localStorage.getItem('pomodoro')
