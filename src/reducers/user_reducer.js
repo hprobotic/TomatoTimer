@@ -24,6 +24,8 @@ export default function(state = initialState, action) {
         login: true
       }
     default:
+      console.log('default state from: ')
+      console.log(state)
       return state
   }
 }

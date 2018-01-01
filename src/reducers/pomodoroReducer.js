@@ -7,7 +7,7 @@ import {
   SAVE_SETTING
 } from '../actions'
 
-const DEFAULT_BREAK_SECS = 1500
+const DEFAULT_BREAK_SECS = 2100
 const SHORT_BREAK_SECS = 300
 const LONG_BREAK_SECS = 600
 
@@ -27,12 +27,12 @@ export default function(state = initialState, action) {
     case SHORT_BREAK:
       return {
         ...state,
-        seconds: SHORT_BREAK_SECS
+        seconds: localStorage.getItem('shortBreak') || SHORT_BREAK_SECS
       }
     case LONG_BREAK:
       return {
         ...state,
-        seconds: LONG_BREAK_SECS
+        seconds: localStorage.getItem('longBreak') || LONG_BREAK_SECS
       }
     case SAVE_SETTING:
       return {
@@ -40,6 +40,8 @@ export default function(state = initialState, action) {
         seconds: action.seconds
       }
     default:
+      console.log('persist pomodoro reducer')
+      console.log(state)
       return state
   }
 }
