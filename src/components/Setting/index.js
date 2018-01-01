@@ -1,11 +1,3 @@
-import React, { Component } from 'react'
-
-export default class extends Component {
-    render () {
-        return (
-            <div>
-                hello i am setting 
-            </div>
-        )
-    }
-}
+// import React, { Component } from 'react'
+import Setting from './Setting'
+export default Setting

@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
-import { Timer, Quotes, KeyboardShortcuts, Sidebar, Chart, Setting} from './components'
+import {
+  Timer,
+  Quotes,
+  KeyboardShortcuts,
+  Sidebar,
+  Chart,
+  Setting
+} from './components'
+import './App.css'
+import { Grid, Image } from 'semantic-ui-react'
 import './App.css'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <div className="App">
         <div className="random-bg" />
-        <div className="grid-container" >
+        <div className="grid-container">
           <div className="item item-1">
             <div className="logo">
               <span className="title">Tomato Timer</span>
@@ -18,8 +31,8 @@ class App extends Component {
           </div>
           <div className="item item-2">
             <Sidebar>
-              <Chart name = "Chart" visibility = 'hidden'/>
-              <Setting name = "Setting" />
+              <Chart name="Chart" visibility="hidden" />
+              <Setting name="Setting" visibility="hidden" />
             </Sidebar>
           </div>
           <div className="item item-3">3</div>

@@ -26,10 +26,13 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
+    "axios": "^0.17.1",
     "eslint": "^4.14.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.4.0",
-    "redux-devtools": "^3.4.1"
+    "firebase": "^4.8.1",
+    "redux-devtools": "^3.4.1",
+    "redux-thunk": "^2.2.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

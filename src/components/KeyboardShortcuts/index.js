@@ -17,6 +17,9 @@ const KeyboardShortcuts = () => (
       <span>
         <strong>ALT + R</strong>&nbsp;&nbsp;Reset Timer
       </span>
+      <span>
+        <strong>ALT + P</strong>&nbsp;&nbsp;Back to Pomodoro
+      </span>
     </p>
   </div>
 )

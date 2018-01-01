@@ -1,3 +1,7 @@
+import _ from 'lodash'
+import fire from '../javascripts/firebase'
+
+export const DEFAULT_USER = 'DEFAULT_USER'
 export const START_COUNTDOWN = 'START_COUNTDOWN'
 export const STOP_COUNTDOWN = 'STOP_COUNTDOWN'
 export const RESET_COUNTDOWN = 'RESET_COUNTDOWN'
@@ -5,11 +9,21 @@ export const ON_TICK = 'ON_TICK'
 export const SHORT_BREAK = 'SHORT_BREAK'
 export const LONG_BREAK = 'LONG_BREAK'
 export const DEFAULT_BREAK = 'DEFAULT_BREAK'
+export const SAVE_SETTING = 'SAVE_SETTING'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 
-export function onTick(currentTime) {
+export function saveSetting(pomodoro, shortbreak, longbreak) {
+  localStorage.setItem('pomodoro', pomodoro)
+  localStorage.setItem('shortBreak', shortbreak)
+  localStorage.setItem('longBreak', longbreak)
   return {
-    type: ON_TICK,
-    seconds: currentTime - 1
+    type: SAVE_SETTING,
+    seconds: localStorage.getItem('pomodoro')
   }
 }
 
@@ -50,5 +64,107 @@ export function shortBreak() {
 export function longBreak() {
   return {
     type: LONG_BREAK
+  }
+}
+
+export function signUp(email, password, pomodoro, shortBreak, longBreak) {
+  console.log('Inside of function signup')
+  return dispatch => {
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(obj => {
+        console.log('inside function then')
+        let database = fire.database()
+        database.ref('users').pus1h({
+          email: obj.email,
+          settings: {
+            pomodoro: pomodoro,
+            shortBreak: shortBreak,
+            longBreak: longBreak
+          }
+        })
+        dispatch({
+          type: SIGNUP_SUCCESS,
+          user: {
+            email: obj.email,
+            settings: {
+              pomodoro: pomodoro,
+              shortBreak: shortBreak,
+              longBreak: longBreak
+            }
+          }
+        })
+      })
+      .catch(error => {
+        console.log(`Error: ${error}`)
+        dispatch({
+          type: SIGNUP_FAILURE,
+          message: error
+        })
+      })
+  }
+}
+
+export function logIn(email, password) {
+  console.log('Inside of function login')
+  return (dispatch, getState) => {
+    fire
+      .auth()
+      .signInAndRetrieveDataWithEmailAndPassword(email, password)
+      .then(obj => {
+        let database = fire.database()
+        let user = database
+          .ref('users')
+          .orderByChild('email')
+          .equalTo(obj.user.email)
+          .limitToFirst(1)
+          .once('value', snapshot => {
+            snapshot
+          })
+          .then(
+            snapshot => {
+              let user = _.first(_.values(snapshot.val()))
+              let settings = user.settings
+              getState().pomodoro.seconds = settings.pomodoro * 60
+              localStorage.setItem('pomodoro', settings.pomodoro)
+              localStorage.setItem('shortBreak', settings.shortBreak)
+              localStorage.setItem('longBreak', settings.longBreak)
+              dispatch({
+                type: LOGIN_SUCCESS,
+                user: user
+              })
+            },
+            error => console.log(error)
+          )
+      })
+      .catch(error => {
+        console.log(`Error: ${error}`)
+        dispatch({
+          type: LOGIN_FAILURE,
+          message: error
+        })
+      })
+  }
+}
+
+export function logOut() {
+  console.log('Inside of function logout')
+  return dispatch => {
+    fire
+      .auth()
+      .signOut()
+      .then(function() {
+        dispatch({
+          type: LOGOUT_SUCCESS
+        })
+      })
+      .catch(function(error) {
+        console.log(error)
+        dispatch({
+          type: LOGOUT_FAILURE,
+          user: {}
+        })
+      })
   }
 }

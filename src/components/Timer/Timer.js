@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
+import axious from 'axios'
+import fire from '../../javascripts/firebase'
+import _ from 'lodash'
+
 import { connect } from 'react-redux'
 import { Grid, Button } from 'semantic-ui-react'
 import { defaultBreak, shortBreak, longBreak } from '../../actions'
@@ -19,6 +23,14 @@ class MainButtons extends Component {
 
   componentWillMount() {
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
+    // let users = fire.database().ref('users')
+    // // console.log(`Users: ${users}`)
+    // users.once('value', snapshot => {
+    //   console.log(snapshot.val())
+    //   this.setState({
+    //     currentSeconds: snapshot.val().settings.pomodoro * 60
+    //   })
+    // })
   }
 
   componentDidMount() {
@@ -28,7 +40,7 @@ class MainButtons extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
+    // console.log(nextProps)
     if (this.props.seconds !== nextProps.seconds) {
       this.onResetButtonPressed()
       this.setState({
@@ -59,7 +71,7 @@ class MainButtons extends Component {
           this.props.defaultBreak()
           break
         case 83:
-          console.log('hello')
+          // console.log('hello')
           this.props.shortBreak()
           break
         case 76:
@@ -73,7 +85,6 @@ class MainButtons extends Component {
       }
     } else {
       if (e.which === 32) {
-        console.log('Go space')
         if (this.state.timerStatus === 'running') {
           this.onStopButtonPressed()
         } else {
