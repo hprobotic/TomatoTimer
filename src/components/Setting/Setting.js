@@ -10,13 +10,33 @@ class Setting extends Component {
   constructor(props) {
     super(props)
     console.log(this.props.pomodoro)
-    // this.state = {
-    //   pomodoro: this.props.pomodoro,
-    //   shortbreak: this.props.shortBreak,
-    //   longbreak: this.props.shortBreak
-    // }
+    this.state = {
+      pomodoro: this.props.pomodoro,
+      shortBreak: this.props.shortBreak || 5,
+      longBreak: this.props.longBreak || 10
+    }
 
     this.handleSave = this.handleSave.bind(this)
+  }
+
+  componentDidUpdate() {
+    let self = this
+    console.log('pomodoro props value: ', this.props.pomodoro)
+    console.log('pomodoro state value: ', this.state.pomodoro)
+    function needToRerender() {
+      return (
+        self.state.pomodoro !== self.props.pomodoro ||
+        self.state.shortBreak !== self.props.shortBreak ||
+        self.state.longBreak !== self.props.longBreak
+      )
+    }
+    if (needToRerender()) {
+      this.setState({
+        pomodoro: this.props.pomodoro,
+        shortBreak: this.props.shortBreak,
+        longBreak: this.props.longBreak
+      })
+    }
   }
 
   handleSave(pomodoro, shortbreak, longbreak, closeModal) {
@@ -24,14 +44,7 @@ class Setting extends Component {
     this.props.saveSetting(pomodoro, shortbreak, longbreak)
   }
 
-  // handleChange(event, type) {
-  //   this.setState({
-  //     type: event.target.value
-  //   })
-  // }
-
   render() {
-    console.log(this.props.login)
     const logout = this.props.login ? (
       <Button
         color="gray"
@@ -45,7 +58,7 @@ class Setting extends Component {
     return (
       <div>
         <Input
-          value={this.props.pomodoro}
+          value={this.state.pomodoro}
           onChange={event => {
             this.setState({ pomodoro: event.target.value })
           }}
@@ -57,7 +70,7 @@ class Setting extends Component {
           label="Pomodoro"
         />
         <Input
-          value={this.props.shortBreak}
+          value={this.state.shortBreak}
           onChange={event => {
             this.setState({ shortbreak: event.target.value })
           }}
@@ -69,7 +82,7 @@ class Setting extends Component {
           label="Short Break"
         />
         <Input
-          value={this.props.longBreak}
+          value={this.state.longBreak}
           onChange={event => {
             this.setState({ longbreak: event.target.value })
           }}
