@@ -40,8 +40,6 @@ export default function(state = initialState, action) {
         seconds: action.seconds
       }
     default:
-      console.log('pomodoro reducer: ')
-      console.log(state)
       return state
   }
 }

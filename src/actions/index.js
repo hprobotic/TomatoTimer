@@ -12,26 +12,9 @@ export const DEFAULT_BREAK = 'DEFAULT_BREAK'
 export const SAVE_SETTING = 'SAVE_SETTING'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
-export const LOGIN = 'LOGIN'
-export const LOGOUT = 'LOGOUT'
-
-export function onTick(currentTime) {
-  return {
-    type: ON_TICK,
-    seconds: currentTime - 1
-  }
-}
-
-// export function getDefaultVal() {
-//   return dispatch => {
-//     init.on('value', snapshot => {
-//       dispatch({
-//         type: DEFAULT_USER,
-//         payload: snapshot.val()
-//       });
-//     });
-//   };
-// }
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGOUT_SUCCESS = 'LOGOUT'
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
   localStorage.setItem('pomodoro', pomodoro * 60)
@@ -40,8 +23,6 @@ export function saveSetting(pomodoro, shortbreak, longbreak) {
   return {
     type: SAVE_SETTING,
     seconds: localStorage.getItem('pomodoro')
-    // shortbreak: localStorage.getItem('shortbreak'),
-    // longbreak: localStorage.getItem('longbreak')
   }
 }
 
@@ -94,11 +75,8 @@ export function signUp(email, password, pomodoro, shortBreak, longBreak) {
       .then(obj => {
         console.log('inside function then')
         let database = fire.database()
-        database.ref('users').push({
-          info: {
-            email: obj.email,
-            token: obj.refreshToken
-          },
+        database.ref('users').pus1h({
+          email: obj.email,
           settings: {
             pomodoro: pomodoro,
             shortBreak: shortBreak,
@@ -108,10 +86,7 @@ export function signUp(email, password, pomodoro, shortBreak, longBreak) {
         dispatch({
           type: SIGNUP_SUCCESS,
           user: {
-            info: {
-              email: obj.email,
-              token: obj.refreshToken
-            },
+            email: obj.email,
             settings: {
               pomodoro: pomodoro,
               shortBreak: shortBreak,
@@ -131,16 +106,37 @@ export function signUp(email, password, pomodoro, shortBreak, longBreak) {
 }
 
 export function logIn(email, password) {
-  return {
-    type: LOGIN,
-    user: fire
+  console.log('Inside of function login')
+  return dispatch => {
+    fire
       .auth()
       .signInAndRetrieveDataWithEmailAndPassword(email, password)
       .then(obj => {
-        console.log(obj)
+        let database = fire.database()
+        let user = database
+          .ref('users')
+          .orderByChild('email')
+          .equalTo(obj.user.email)
+          .limitToFirst(1)
+          .once('value', snapshot => {
+            snapshot
+          })
+          .then(
+            snapshot => {
+              dispatch({
+                type: LOGIN_SUCCESS,
+                user: _.first(_.values(snapshot.val()))
+              })
+            },
+            error => console.log(error)
+          )
       })
       .catch(error => {
         console.log(`Error: ${error}`)
+        dispatch({
+          type: LOGIN_FAILURE,
+          message: error
+        })
       })
   }
 }

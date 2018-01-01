@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
-import { saveSetting, signUp } from '../../actions/index'
+import { saveSetting, signUp, logIn } from '../../actions/index'
 import Authentication from '../Authentication/index'
 import './Setting.css'
 
@@ -93,7 +93,7 @@ class Setting extends Component {
           Save Setting
         </Button>
         <Authentication
-          login={this.props.login}
+          logIn={this.props.logIn}
           signUp={this.props.signUp}
           pomodoro={this.props.pomodoro}
           shortBreak={this.props.shortBreak}
@@ -118,7 +118,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       saveSetting: saveSetting,
-      signUp: signUp
+      signUp: signUp,
+      logIn: logIn
     },
     dispatch
   )

@@ -18,7 +18,6 @@ class Authentication extends Component {
   signupFirebase() {
     const { email, password } = this.state
     console.log('inside of signupFirebase')
-    console.log(this.props)
     this.props.signUp(
       email,
       password,
@@ -31,41 +30,26 @@ class Authentication extends Component {
 
   loginFirebase() {
     const { email, password } = this.state
-    fire
-      .auth()
-      .signInAndRetrieveDataWithEmailAndPassword(email, password)
-      .then(obj => {
-        console.log(obj.user.refreshToken)
-        let database = fire.database()
-        console.log(
-          database
-            .ref('users')
-            .orderByChild('email')
-            .equalTo(obj.user.email)
-            .limitToFirst(1)
-            .on('child_added', snap => {
-              console.log(snap.val())
-            })
-          // .equalTo(obj.user.email, 'email')
-          // .then(result => console.log(result.val()))
-        )
-        // database.ref('users').push({
-        //   email: obj.user.email,
-        //   token: obj.user.refreshToken,
-        //   settings: {
-        //     pomodoro_in_seconds:
-        //       parseInt(localStorage.getItem('pomodoro')) || 25 * 60,
-        //     shortBreak_in_seconds:
-        //       parseInt(localStorage.getItem('shortBreak')) || 5 * 60,
-        //     longBreak_in_seconds:
-        //       parseInt(localStorage.getItem('longBreak')) || 10 * 60
-        //   }
-        // })
-      })
-      .catch(error => {
-        console.log(`Error: ${error}`)
-      })
+    console.log('inside of loginFirebase')
+    this.props.logIn(email, password)
     this.close()
+    // fire
+    //   .auth()
+    //   .signInAndRetrieveDataWithEmailAndPassword(email, password)
+    //   .then(obj => {
+    //     console.log('user email: ', obj.user.email)
+    //     let database = fire.database()
+    //     // database
+    //     //   .ref('users')
+    //     //   .orderByChild('email')
+    //     //   .equalTo(obj.user.email)
+    //     //   .limitToFirst(1)
+    //     //   .once('value', snapshot => {
+    //     //     console.log(snapshot.val())
+    //     //     console.log(_.first(_.values(val)))
+    //     //   })
+
+    //   })
   }
 
   show = dimmer => () => this.setState({ dimmer, open: true })
