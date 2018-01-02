@@ -57,7 +57,6 @@ class Setting extends Component {
         <Button
           color="blue"
           onClick={() => {
-            console.log('current email is: ', this.props.email)
             this.props.syncingData(this.props.email)
           }}
         >
@@ -81,20 +80,6 @@ class Setting extends Component {
         <Grid centered>
           <Grid.Row>
             <Input
-              value={this.state.longBreak}
-              onChange={event => {
-                this.setState({ longbreak: event.target.value })
-              }}
-              id="time_longbreak"
-              type="number"
-              min="1"
-              step="1"
-              size="mini"
-              label="Long Break"
-            />
-          </Grid.Row>
-          <Grid.Row>
-            <Input
               value={this.state.pomodoro}
               onChange={event => {
                 this.setState({ pomodoro: event.target.value })
@@ -111,7 +96,7 @@ class Setting extends Component {
             <Input
               value={this.state.shortBreak}
               onChange={event => {
-                this.setState({ shortbreak: event.target.value })
+                this.setState({ shortBreak: event.target.value })
               }}
               id="time_shortbreak"
               type="number"
@@ -119,6 +104,20 @@ class Setting extends Component {
               step="1"
               size="mini"
               label="Short Break"
+            />
+          </Grid.Row>
+          <Grid.Row>
+            <Input
+              value={this.state.longBreak}
+              onChange={event => {
+                this.setState({ longBreak: event.target.value })
+              }}
+              id="time_longbreak"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Long Break"
             />
           </Grid.Row>
           <Button
