@@ -15,7 +15,6 @@ import './Setting.css'
 class Setting extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.pomodoro)
     this.state = {
       pomodoro: this.props.pomodoro,
       shortBreak: this.props.shortBreak || 5,
@@ -34,9 +33,9 @@ class Setting extends Component {
     })
   }
 
-  handleSave(pomodoro, shortbreak, longbreak, closeModal) {
+  handleSave(pomodoro, shortBreak, longBreak, closeModal) {
     console.log('clicked!!!!')
-    this.props.saveSetting(pomodoro, shortbreak, longbreak)
+    this.props.saveSetting(pomodoro, shortBreak, longBreak)
   }
 
   render() {
@@ -125,8 +124,8 @@ class Setting extends Component {
             onClick={() => {
               this.handleSave(
                 this.state.pomodoro,
-                this.state.shortbreak,
-                this.state.longbreak,
+                this.state.shortBreak,
+                this.state.longBreak,
                 this.props.close
               )
             }}
