@@ -39,14 +39,16 @@ class Sidebar extends React.Component {
     let self = this
     const className = self.state.visible ? 'menuShow' : 'menuHide'
     const child = self.props.children.filter(function(ele) {
+      console.log('current state: ', self.state.showItem)
       return ele.props.name === self.state.showItem
     })
     return (
       <div>
-        <div className="button">
+        <div>
           <SettingPopup />
           <Button
-            floated="right"
+            className="statistic-btn"
+            floated="left"
             color="green"
             size="big"
             content="Statistic"
