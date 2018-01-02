@@ -2,7 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/4c7689f6e4974996129a/maintainability)](https://codeclimate.com/github/hprobotic/TomatoTimer/maintainability)
 
-**Tomato Timer** is a pomodoro app that is inspired from Tomato Timer(https://tomato-timer.com/). However, we rebuilt this application with React and Redux from scratch.
+**Tomato Timer** is a pomodoro app that is inspired from Tomato Timer(https://tomato-timer.com/). However, we rebuilt this application with React and Redux from scratch, and add more features to it.
 
 Time spent: **60** hours spent in total
 
@@ -16,13 +16,14 @@ The following **required** functionality is completed:
 * [x] Firebase, Signup, Login, Logout.
 * [x] User can sync data from/to firebase
 * [x] Daily random quotes
+* [x] User can syncing their data from/to firebase after signing up or loggin in (Yes, we know our flow is kind of funny and needs to improved)
+*[x] 
 * User can go to setting and change:
   * [x] 1. Pomodoro duration.
   * [x] 2. Short break duration.
   * [x] 3. Long break duration.
 
-The following optional features will be after the course implemented:
-
+The following optional features will implemented be after the course finished:
 * [] Play song during pomodoro time.
 * [] Sound Test Before Applying
 * [] Sharing the application through facebook.
@@ -31,6 +32,7 @@ The following optional features will be after the course implemented:
 * [] User can enable and disable desktop alert.
 * [] User can keep track of user's focus time daily and weekly.
 * [] Chart to visualize their focus on.
+* [] Better and UI/UX
 
 ## Video Walkthrough
 
@@ -39,10 +41,6 @@ Here's a walkthrough of implemented user stories:
 <img src='https://github.com/domanhtien2011/TomatoTimer' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Peek](https://github.com/phw/peek).
-
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 

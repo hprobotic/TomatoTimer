@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Popup, Button, Header, Input, Image, Modal } from 'semantic-ui-react'
+import { Grid, Button, Header, Input, Image, Modal } from 'semantic-ui-react'
 import fire from '../../javascripts/firebase'
 import _ from 'lodash'
 
@@ -17,7 +17,6 @@ class Authentication extends Component {
 
   signupFirebase() {
     const { email, password } = this.state
-    console.log('inside of signupFirebase')
     this.props.signUp(
       email,
       password,
@@ -30,7 +29,6 @@ class Authentication extends Component {
 
   loginFirebase() {
     const { email, password } = this.state
-    console.log('inside of loginFirebase')
     this.props.logIn(email, password)
     this.close()
   }
@@ -40,36 +38,42 @@ class Authentication extends Component {
 
   render() {
     const { open, dimmer } = this.state
-
     return (
       <div>
         <Button color="green" onClick={this.show('blurring')}>
-          Syncing Data to/from Cloud
+          Login
         </Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Setting Data Cloud</Modal.Header>
           <Modal.Content>
             <Modal.Description>
-              {/* <Header>Pushing Your Setting Data to Use Everywhere</Header> */}
-              <Input
-                value={this.state.email}
-                onChange={event => {
-                  this.setState({ email: event.target.value })
-                }}
-                id="user_email"
-                type="emai"
-                label="Email"
-              />
-              <Input
-                value={this.state.password}
-                onChange={event => {
-                  this.setState({ password: event.target.value })
-                }}
-                id="user_password"
-                type="password"
-                min="1"
-                label="Password"
-              />
+              <Grid>
+                <Grid.Row columns={2}>
+                  <Grid.Column>
+                    <Input
+                      value={this.state.email}
+                      onChange={event => {
+                        this.setState({ email: event.target.value })
+                      }}
+                      id="user_email"
+                      type="emai"
+                      label="Email"
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Input
+                      value={this.state.password}
+                      onChange={event => {
+                        this.setState({ password: event.target.value })
+                      }}
+                      id="user_password"
+                      type="password"
+                      min="1"
+                      label="Password"
+                    />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

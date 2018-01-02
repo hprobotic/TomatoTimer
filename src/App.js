@@ -35,11 +35,9 @@ class App extends Component {
               <Setting name="Setting" visibility="hidden" />
             </Sidebar>
           </div>
-          <div className="item item-3">3</div>
           <div className="item item-4">
             <Timer />
           </div>
-          <div className="item item-5">5</div>
           <div className="item item-7">
             <Quotes />
             <KeyboardShortcuts />

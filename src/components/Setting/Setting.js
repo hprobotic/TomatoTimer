@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
-import { saveSetting, signUp, logIn, logOut } from '../../actions/index'
+import {
+  saveSetting,
+  signUp,
+  logIn,
+  logOut,
+  syncingData
+} from '../../actions/index'
 import Authentication from '../Authentication/index'
 import './Setting.css'
 
@@ -19,24 +25,13 @@ class Setting extends Component {
     this.handleSave = this.handleSave.bind(this)
   }
 
-  componentDidUpdate() {
-    let self = this
-    console.log('pomodoro props value: ', this.props.pomodoro)
-    console.log('pomodoro state value: ', this.state.pomodoro)
-    function needToRerender() {
-      return (
-        self.state.pomodoro !== self.props.pomodoro ||
-        self.state.shortBreak !== self.props.shortBreak ||
-        self.state.longBreak !== self.props.longBreak
-      )
-    }
-    if (needToRerender()) {
-      this.setState({
-        pomodoro: this.props.pomodoro,
-        shortBreak: this.props.shortBreak,
-        longBreak: this.props.longBreak
-      })
-    }
+  componentWillReceiveProps(nextProps) {
+    console.log('inside of receive props: ', nextProps)
+    this.setState({
+      pomodoro: nextProps.pomodoro,
+      shortBreak: nextProps.shortBreak,
+      longBreak: nextProps.longBreak
+    })
   }
 
   handleSave(pomodoro, shortbreak, longbreak, closeModal) {
@@ -46,67 +41,32 @@ class Setting extends Component {
 
   render() {
     const logout = this.props.login ? (
-      <Button
-        color="gray"
-        onClick={() => {
-          this.props.logOut()
-        }}
-      >
-        Logout
-      </Button>
-    ) : null
-    return (
-      <div>
-        <Input
-          value={this.state.pomodoro}
-          onChange={event => {
-            this.setState({ pomodoro: event.target.value })
-          }}
-          id="time_pomodoro"
-          type="number"
-          min="1"
-          step="1"
-          size="mini"
-          label="Pomodoro"
-        />
-        <Input
-          value={this.state.shortBreak}
-          onChange={event => {
-            this.setState({ shortbreak: event.target.value })
-          }}
-          id="time_shortbreak"
-          type="number"
-          min="1"
-          step="1"
-          size="mini"
-          label="Short Break"
-        />
-        <Input
-          value={this.state.longBreak}
-          onChange={event => {
-            this.setState({ longbreak: event.target.value })
-          }}
-          id="time_longbreak"
-          type="number"
-          min="1"
-          step="1"
-          size="mini"
-          label="Long Break"
-        />
-        <br />
+      <Grid.Row>
         <Button
-          color="green"
+          color="gray"
           onClick={() => {
-            this.handleSave(
-              this.state.pomodoro,
-              this.state.shortbreak,
-              this.state.longbreak,
-              this.props.close
-            )
+            this.props.logOut()
           }}
         >
-          Save Setting
+          Logout
         </Button>
+      </Grid.Row>
+    ) : null
+    const syncingDataFromCloud = this.props.login ? (
+      <Grid.Row>
+        <Button
+          color="blue"
+          onClick={() => {
+            console.log('current email is: ', this.props.email)
+            this.props.syncingData(this.props.email)
+          }}
+        >
+          Syncing Data From Cloud
+        </Button>
+      </Grid.Row>
+    ) : null
+    const authentication = !this.props.login ? (
+      <Grid.Row>
         <Authentication
           logIn={this.props.logIn}
           signUp={this.props.signUp}
@@ -114,18 +74,83 @@ class Setting extends Component {
           shortBreak={this.props.shortBreak}
           longBreak={this.props.longBreak}
         />
-        {logout}
+      </Grid.Row>
+    ) : null
+    return (
+      <div>
+        <Grid centered>
+          <Grid.Row>
+            <Input
+              value={this.state.longBreak}
+              onChange={event => {
+                this.setState({ longbreak: event.target.value })
+              }}
+              id="time_longbreak"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Long Break"
+            />
+          </Grid.Row>
+          <Grid.Row>
+            <Input
+              value={this.state.pomodoro}
+              onChange={event => {
+                this.setState({ pomodoro: event.target.value })
+              }}
+              id="time_pomodoro"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Pomodoro"
+            />
+          </Grid.Row>
+          <Grid.Row>
+            <Input
+              value={this.state.shortBreak}
+              onChange={event => {
+                this.setState({ shortbreak: event.target.value })
+              }}
+              id="time_shortbreak"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Short Break"
+            />
+          </Grid.Row>
+          <Button
+            color="green"
+            onClick={() => {
+              this.handleSave(
+                this.state.pomodoro,
+                this.state.shortbreak,
+                this.state.longbreak,
+                this.props.close
+              )
+            }}
+          >
+            Save Setting
+          </Button>
+          {authentication}
+          {syncingDataFromCloud}
+          {logout}
+        </Grid>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
+  console.log('current user state: ', state.user)
   return {
     login: state.user.login,
     pomodoro: state.user.user.settings.pomodoro,
     shortBreak: state.user.user.settings.shortBreak,
-    longBreak: state.user.user.settings.longBreak
+    longBreak: state.user.user.settings.longBreak,
+    email: state.user.user.email
   }
 }
 
@@ -135,7 +160,8 @@ function mapDispatchToProps(dispatch) {
       saveSetting: saveSetting,
       signUp: signUp,
       logIn: logIn,
-      logOut: logOut
+      logOut: logOut,
+      syncingData: syncingData
     },
     dispatch
   )

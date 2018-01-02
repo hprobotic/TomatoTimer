@@ -1,8 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
-import { Button } from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 import './Sidebar.css'
-import Setting from '../../components/Setting/index'
+import SettingPopup from '../../components/SettingPopup/index'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -39,18 +39,19 @@ class Sidebar extends React.Component {
     let self = this
     const className = self.state.visible ? 'menuShow' : 'menuHide'
     const child = self.props.children.filter(function(ele) {
+      console.log('current state: ', self.state.showItem)
       return ele.props.name === self.state.showItem
     })
     return (
       <div>
-        <div className="button">
-          <Setting />
+        <div>
+          <SettingPopup />
           <Button
-            circular
-            floated="right"
-            icon="bar chart"
+            className="statistic-btn"
+            floated="left"
+            color="green"
             size="big"
-            basic
+            content="Statistic"
             onClick={self.showChartMenu.bind(self)}
           />
         </div>

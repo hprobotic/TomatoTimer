@@ -4,7 +4,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE
+  LOGOUT_FAILURE,
+  SYNCING_DATA_SUCCESS
 } from '../actions/index'
 
 const initialState = {
@@ -28,17 +29,30 @@ export default function(state = initialState, action) {
         user: action.user
       }
     case LOGIN_SUCCESS:
-      console.log('Log in successfully')
-      console.log(action.user)
+      console.log('Log in successfully', action.email)
       return {
+        ...state,
         login: true,
-        user: action.user
+        user: {
+          email: action.email,
+          settings: {
+            pomodoro: state.user.settings.pomodoro,
+            shortBreak: state.user.settings.shortBreak,
+            longBreak: state.user.settings.longBreak
+          }
+        }
       }
     case LOGOUT_SUCCESS:
       console.log('Log out successfully')
       return {
         ...state,
         login: false
+      }
+    case SYNCING_DATA_SUCCESS:
+      console.log('Syncing data successfully', action.user)
+      return {
+        ...state,
+        user: action.user
       }
     default:
       return state
