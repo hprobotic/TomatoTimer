@@ -78,7 +78,7 @@ export function signUp(email, password, pomodoro, shortBreak, longBreak) {
       .then(obj => {
         console.log('inside function then')
         let database = fire.database()
-        database.ref('users').pus1h({
+        database.ref('users').push({
           email: obj.email,
           settings: {
             pomodoro: pomodoro,
