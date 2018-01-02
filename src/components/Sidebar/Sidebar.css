@@ -18,12 +18,12 @@
   right: 100px;
   top: 0px;
   height: 1000px;
-  z-index: -1;
+  z-index: 1;
   transform: translate3d(100px, 0, 0);
   transition-duration: 0.5s;
   transition-timing-function: ease-in-out;
 }
 
-.button {
-  z-index: 3;
+.statistic-btn {
+  z-index: 3 !important;
 }
