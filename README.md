@@ -1,40 +1,36 @@
-# Final Project - _Tomato Timer_
+# Final Project - Tomato Timer
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/4c7689f6e4974996129a/maintainability)](https://codeclimate.com/github/hprobotic/TomatoTimer/maintainability)
 
 **Tomato Timer** is a pomodoro app that is inspired from Tomato Timer(https://tomato-timer.com/). However, we rebuilt this application with React and Redux from scratch.
 
-Time spent: **Working On It** hours spent in total
+Time spent: **60** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [x] User can see 3 main tabs which are pomodoro, short break, and long break. [Deprecated]
-* [x] User can use start, stop, reset buttons for all the tabs.
-* [ ] User can see the currently active tab.
-* [ ] The app starts to count when user clicks on one the 3 tabs.
-* [ ] User sees an error message when there is a card processing error.
-* [ ] User can user their keyboard to select the tab, start the time, stop the time, and reset the time.
-* [ ] User can enable and disable desktop alert.
-* [ ] User can sync data: focus hours, focus count, settings, name, email
-* [ ] Daily quotes
+* [x] User can choose  pomodoro, short-break, long-break
+* [x] User can use start, pause, resume, reset the time.
+* [x] User can user their keyboard to select the tab, start the time, stop the time, and reset the time.
+* [x] Firebase, Signup, Login, Logout.
+* [x] User can sync data from/to firebase
+* [x] Daily random quotes
 * User can go to setting and change:
-  * [ ] 1. Pomodoro duration.
-  * [ ] 2. Short break duration.
-  * [ ] 3. Long break duration.
-  * [ ] 4. Sound.
-  * [ ] 5. Sound Volume
+  * [x] 1. Pomodoro duration.
+  * [x] 2. Short break duration.
+  * [x] 3. Long break duration.
 
-The following optional features are implemented:
+The following optional features will be after the course implemented:
 
-* [ ] Play song during pomodoro time.
-* [ ] Reset setting.
-* [ ] Sound test.
-* [ ] Sharing the application through facebook.
-* [ ] Premium features: Integrate with Spotify, Random background image from unsplash.
-* [ ] Publish on chrome extension store
-* [ ] Built desktop version with electron
+* [] Play song during pomodoro time.
+* [] Sound Test Before Applying
+* [] Sharing the application through facebook.
+* [] Premium features: Integrate with Spotify, Random background image from unsplash.
+* [] Make progressive app
+* [] User can enable and disable desktop alert.
+* [] User can keep track of user's focus time daily and weekly.
+* [] Chart to visualize their focus on.
 
 ## Video Walkthrough
 

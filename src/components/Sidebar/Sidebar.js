@@ -44,14 +44,6 @@ class Sidebar extends React.Component {
     return (
       <div>
         <div className="button">
-          {/* <Button
-            circular
-            floated="right"
-            icon="settings"
-            size="big"
-            basic
-            onClick={self.showSettingMenu.bind(self)}
-          /> */}
           <Setting />
           <Button
             circular

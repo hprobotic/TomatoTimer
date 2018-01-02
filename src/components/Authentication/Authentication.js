@@ -33,39 +33,12 @@ class Authentication extends Component {
     console.log('inside of loginFirebase')
     this.props.logIn(email, password)
     this.close()
-    // fire
-    //   .auth()
-    //   .signInAndRetrieveDataWithEmailAndPassword(email, password)
-    //   .then(obj => {
-    //     console.log('user email: ', obj.user.email)
-    //     let database = fire.database()
-    //     // database
-    //     //   .ref('users')
-    //     //   .orderByChild('email')
-    //     //   .equalTo(obj.user.email)
-    //     //   .limitToFirst(1)
-    //     //   .once('value', snapshot => {
-    //     //     console.log(snapshot.val())
-    //     //     console.log(_.first(_.values(val)))
-    //     //   })
-
-    //   })
   }
 
   show = dimmer => () => this.setState({ dimmer, open: true })
   close = () => this.setState({ open: false })
 
   render() {
-    // fire.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     console.log(
-    //       'Account has been created successfully or user is logged in'
-    //     )
-    //   } else {
-    //     console.log('user has signed out or needs to login')
-    //   }
-    // })
-
     const { open, dimmer } = this.state
 
     return (
