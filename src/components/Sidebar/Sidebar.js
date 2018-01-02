@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { Button, Grid } from 'semantic-ui-react'
 import './Sidebar.css'
-import Setting from '../../components/Setting/index'
+import SettingPopup from '../../components/SettingPopup/index'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
     return (
       <div>
         <div className="button">
-          <Setting />
+          <SettingPopup />
           <Button
             color="green"
             size="big"

@@ -25,27 +25,6 @@ class Setting extends Component {
     this.handleSave = this.handleSave.bind(this)
   }
 
-  // ?componentDidUpdate(previousProps, previousState) {
-  // console.log('Next prop: ', previousProps)
-  // console.log('Next state: ', previousState)
-  // console.log('Current props', this.props)
-  // let self = this
-  // function needToRerender() {
-  //   return (
-  //     self.previousState.pomodoro !== self.props.pomodoro ||
-  //     self.previousState.shortBreak !== self.props.shortBreak ||
-  //     self.previousState.longBreak !== self.props.longBreak
-  //   )
-  // }
-  // if (needToRerender()) {
-  //   this.setState({
-  //     pomodoro: this.props.pomodoro,
-  //     shortBreak: this.props.shortBreak,
-  //     longBreak: this.props.longBreak
-  //   })
-  // }
-  // }
-
   componentWillReceiveProps(nextProps) {
     console.log('inside of receive props: ', nextProps)
     this.setState({

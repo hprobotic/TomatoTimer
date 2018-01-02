@@ -17,7 +17,6 @@ class Authentication extends Component {
 
   signupFirebase() {
     const { email, password } = this.state
-    console.log('inside of signupFirebase')
     this.props.signUp(
       email,
       password,
@@ -30,7 +29,6 @@ class Authentication extends Component {
 
   loginFirebase() {
     const { email, password } = this.state
-    console.log('inside of loginFirebase')
     this.props.logIn(email, password)
     this.close()
   }
