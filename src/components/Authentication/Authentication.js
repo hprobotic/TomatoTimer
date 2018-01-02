@@ -40,17 +40,15 @@ class Authentication extends Component {
 
   render() {
     const { open, dimmer } = this.state
-
     return (
       <div>
         <Button color="green" onClick={this.show('blurring')}>
-          Syncing Data to/from Cloud
+          Login
         </Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Setting Data Cloud</Modal.Header>
           <Modal.Content>
             <Modal.Description>
-              {/* <Header>Pushing Your Setting Data to Use Everywhere</Header> */}
               <Input
                 value={this.state.email}
                 onChange={event => {

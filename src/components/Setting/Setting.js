@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Modal, Button, Icon, Header, Input, Grid } from 'semantic-ui-react'
-import { saveSetting, signUp, logIn, logOut } from '../../actions/index'
+import {
+  saveSetting,
+  signUp,
+  logIn,
+  logOut,
+  syncingData
+} from '../../actions/index'
 import Authentication from '../Authentication/index'
 import './Setting.css'
 
@@ -19,24 +25,34 @@ class Setting extends Component {
     this.handleSave = this.handleSave.bind(this)
   }
 
-  componentDidUpdate() {
-    let self = this
-    console.log('pomodoro props value: ', this.props.pomodoro)
-    console.log('pomodoro state value: ', this.state.pomodoro)
-    function needToRerender() {
-      return (
-        self.state.pomodoro !== self.props.pomodoro ||
-        self.state.shortBreak !== self.props.shortBreak ||
-        self.state.longBreak !== self.props.longBreak
-      )
-    }
-    if (needToRerender()) {
-      this.setState({
-        pomodoro: this.props.pomodoro,
-        shortBreak: this.props.shortBreak,
-        longBreak: this.props.longBreak
-      })
-    }
+  // ?componentDidUpdate(previousProps, previousState) {
+  // console.log('Next prop: ', previousProps)
+  // console.log('Next state: ', previousState)
+  // console.log('Current props', this.props)
+  // let self = this
+  // function needToRerender() {
+  //   return (
+  //     self.previousState.pomodoro !== self.props.pomodoro ||
+  //     self.previousState.shortBreak !== self.props.shortBreak ||
+  //     self.previousState.longBreak !== self.props.longBreak
+  //   )
+  // }
+  // if (needToRerender()) {
+  //   this.setState({
+  //     pomodoro: this.props.pomodoro,
+  //     shortBreak: this.props.shortBreak,
+  //     longBreak: this.props.longBreak
+  //   })
+  // }
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('inside of receive props: ', nextProps)
+    this.setState({
+      pomodoro: nextProps.pomodoro,
+      shortBreak: nextProps.shortBreak,
+      longBreak: nextProps.longBreak
+    })
   }
 
   handleSave(pomodoro, shortbreak, longbreak, closeModal) {
@@ -54,6 +70,26 @@ class Setting extends Component {
       >
         Logout
       </Button>
+    ) : null
+    const syncingDataFromCloud = this.props.login ? (
+      <Button
+        color="blue"
+        onClick={() => {
+          console.log('current email is: ', this.props.email)
+          this.props.syncingData(this.props.email)
+        }}
+      >
+        Syncing Data From Cloud
+      </Button>
+    ) : null
+    const authentication = !this.props.login ? (
+      <Authentication
+        logIn={this.props.logIn}
+        signUp={this.props.signUp}
+        pomodoro={this.props.pomodoro}
+        shortBreak={this.props.shortBreak}
+        longBreak={this.props.longBreak}
+      />
     ) : null
     return (
       <div>
@@ -107,13 +143,8 @@ class Setting extends Component {
         >
           Save Setting
         </Button>
-        <Authentication
-          logIn={this.props.logIn}
-          signUp={this.props.signUp}
-          pomodoro={this.props.pomodoro}
-          shortBreak={this.props.shortBreak}
-          longBreak={this.props.longBreak}
-        />
+        {authentication}
+        {syncingDataFromCloud}
         {logout}
       </div>
     )
@@ -121,11 +152,13 @@ class Setting extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('current user state: ', state.user)
   return {
     login: state.user.login,
     pomodoro: state.user.user.settings.pomodoro,
     shortBreak: state.user.user.settings.shortBreak,
-    longBreak: state.user.user.settings.longBreak
+    longBreak: state.user.user.settings.longBreak,
+    email: state.user.user.email
   }
 }
 
@@ -135,7 +168,8 @@ function mapDispatchToProps(dispatch) {
       saveSetting: saveSetting,
       signUp: signUp,
       logIn: logIn,
-      logOut: logOut
+      logOut: logOut,
+      syncingData: syncingData
     },
     dispatch
   )

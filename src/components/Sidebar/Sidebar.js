@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { Button } from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 import './Sidebar.css'
 import Setting from '../../components/Setting/index'
 
@@ -46,11 +46,9 @@ class Sidebar extends React.Component {
         <div className="button">
           <Setting />
           <Button
-            circular
-            floated="right"
-            icon="bar chart"
+            color="green"
             size="big"
-            basic
+            content="Statistic"
             onClick={self.showChartMenu.bind(self)}
           />
         </div>

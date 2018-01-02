@@ -16,6 +16,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
+export const SYNCING_DATA_SUCCESS = 'SYNCING_DATA_SUCCESS'
+export const SYNCING_DATA_FAILURE = 'SYNCING_DATA_FAILURE'
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
   localStorage.setItem('pomodoro', pomodoro)
@@ -108,35 +110,15 @@ export function signUp(email, password, pomodoro, shortBreak, longBreak) {
 
 export function logIn(email, password) {
   console.log('Inside of function login')
-  return (dispatch, getState) => {
+  return dispatch => {
     fire
       .auth()
       .signInAndRetrieveDataWithEmailAndPassword(email, password)
       .then(obj => {
-        let database = fire.database()
-        let user = database
-          .ref('users')
-          .orderByChild('email')
-          .equalTo(obj.user.email)
-          .limitToFirst(1)
-          .once('value', snapshot => {
-            snapshot
-          })
-          .then(
-            snapshot => {
-              let user = _.first(_.values(snapshot.val()))
-              let settings = user.settings
-              getState().pomodoro.seconds = settings.pomodoro * 60
-              localStorage.setItem('pomodoro', settings.pomodoro)
-              localStorage.setItem('shortBreak', settings.shortBreak)
-              localStorage.setItem('longBreak', settings.longBreak)
-              dispatch({
-                type: LOGIN_SUCCESS,
-                user: user
-              })
-            },
-            error => console.log(error)
-          )
+        dispatch({
+          type: LOGIN_SUCCESS,
+          email: obj.user.email
+        })
       })
       .catch(error => {
         console.log(`Error: ${error}`)
@@ -162,9 +144,38 @@ export function logOut() {
       .catch(function(error) {
         console.log(error)
         dispatch({
-          type: LOGOUT_FAILURE,
-          user: {}
+          type: LOGOUT_FAILURE
         })
       })
+  }
+}
+
+export function syncingData(email) {
+  console.log('Inside of function syncing data', email)
+  return (dispatch, getState) => {
+    let database = fire.database()
+    let user = database
+      .ref('users')
+      .orderByChild('email')
+      .equalTo(email)
+      .limitToFirst(1)
+      .once('value', snapshot => {
+        snapshot
+      })
+      .then(
+        snapshot => {
+          let user = _.first(_.values(snapshot.val()))
+          let settings = user.settings
+          getState().pomodoro.seconds = settings.pomodoro * 60
+          localStorage.setItem('pomodoro', settings.pomodoro)
+          localStorage.setItem('shortBreak', settings.shortBreak)
+          localStorage.setItem('longBreak', settings.longBreak)
+          dispatch({
+            type: SYNCING_DATA_SUCCESS,
+            user: user
+          })
+        },
+        error => console.log(error)
+      )
   }
 }
