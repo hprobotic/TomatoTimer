@@ -16,25 +16,28 @@ class Setting extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pomodoro: this.props.pomodoro,
-      shortBreak: this.props.shortBreak || 5,
-      longBreak: this.props.longBreak || 10
+      pomodoro: localStorage.getItem('pomodoro') || 25,
+      shortBreak: localStorage.getItem('shortBreak') || 5,
+      longBreak: localStorage.getItem('longBreak') || 10
     }
+    console.log(this.state.shortBreak)
+    console.log(this.state.longBreak)
 
     this.handleSave = this.handleSave.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('inside of receive props: ', nextProps)
-    this.setState({
-      pomodoro: nextProps.pomodoro,
-      shortBreak: nextProps.shortBreak,
-      longBreak: nextProps.longBreak
-    })
+    if (nextProps.email) {
+      this.setState({
+        pomodoro: nextProps.pomodoro,
+        shortBreak: nextProps.shortBreak,
+        longBreak: nextProps.longBreak
+      })
+    }
   }
 
   handleSave(pomodoro, shortBreak, longBreak, closeModal) {
-    console.log('clicked!!!!')
     this.props.saveSetting(pomodoro, shortBreak, longBreak)
   }
 

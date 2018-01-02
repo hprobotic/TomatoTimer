@@ -20,9 +20,9 @@ class Authentication extends Component {
     this.props.signUp(
       email,
       password,
-      this.props.pomodoro,
-      this.props.shortBreak,
-      this.props.longBreak
+      localStorage.getItem('pomodoro'),
+      localStorage.getItem('shortBreak'),
+      localStorage.getItem('longBreak')
     )
     this.close()
   }
@@ -41,7 +41,7 @@ class Authentication extends Component {
     return (
       <div>
         <Button color="green" onClick={this.show('blurring')}>
-          Login
+          Login/Signup
         </Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Setting Data Cloud</Modal.Header>
