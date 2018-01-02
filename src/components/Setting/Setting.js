@@ -41,90 +41,103 @@ class Setting extends Component {
 
   render() {
     const logout = this.props.login ? (
-      <Button
-        color="gray"
-        onClick={() => {
-          this.props.logOut()
-        }}
-      >
-        Logout
-      </Button>
+      <Grid.Row>
+        <Button
+          color="gray"
+          onClick={() => {
+            this.props.logOut()
+          }}
+        >
+          Logout
+        </Button>
+      </Grid.Row>
     ) : null
     const syncingDataFromCloud = this.props.login ? (
-      <Button
-        color="blue"
-        onClick={() => {
-          console.log('current email is: ', this.props.email)
-          this.props.syncingData(this.props.email)
-        }}
-      >
-        Syncing Data From Cloud
-      </Button>
+      <Grid.Row>
+        <Button
+          color="blue"
+          onClick={() => {
+            console.log('current email is: ', this.props.email)
+            this.props.syncingData(this.props.email)
+          }}
+        >
+          Syncing Data From Cloud
+        </Button>
+      </Grid.Row>
     ) : null
     const authentication = !this.props.login ? (
-      <Authentication
-        logIn={this.props.logIn}
-        signUp={this.props.signUp}
-        pomodoro={this.props.pomodoro}
-        shortBreak={this.props.shortBreak}
-        longBreak={this.props.longBreak}
-      />
+      <Grid.Row>
+        <Authentication
+          logIn={this.props.logIn}
+          signUp={this.props.signUp}
+          pomodoro={this.props.pomodoro}
+          shortBreak={this.props.shortBreak}
+          longBreak={this.props.longBreak}
+        />
+      </Grid.Row>
     ) : null
     return (
       <div>
-        <Input
-          value={this.state.pomodoro}
-          onChange={event => {
-            this.setState({ pomodoro: event.target.value })
-          }}
-          id="time_pomodoro"
-          type="number"
-          min="1"
-          step="1"
-          size="mini"
-          label="Pomodoro"
-        />
-        <Input
-          value={this.state.shortBreak}
-          onChange={event => {
-            this.setState({ shortbreak: event.target.value })
-          }}
-          id="time_shortbreak"
-          type="number"
-          min="1"
-          step="1"
-          size="mini"
-          label="Short Break"
-        />
-        <Input
-          value={this.state.longBreak}
-          onChange={event => {
-            this.setState({ longbreak: event.target.value })
-          }}
-          id="time_longbreak"
-          type="number"
-          min="1"
-          step="1"
-          size="mini"
-          label="Long Break"
-        />
-        <br />
-        <Button
-          color="green"
-          onClick={() => {
-            this.handleSave(
-              this.state.pomodoro,
-              this.state.shortbreak,
-              this.state.longbreak,
-              this.props.close
-            )
-          }}
-        >
-          Save Setting
-        </Button>
-        {authentication}
-        {syncingDataFromCloud}
-        {logout}
+        <Grid centered>
+          <Grid.Row>
+            <Input
+              value={this.state.longBreak}
+              onChange={event => {
+                this.setState({ longbreak: event.target.value })
+              }}
+              id="time_longbreak"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Long Break"
+            />
+          </Grid.Row>
+          <Grid.Row>
+            <Input
+              value={this.state.pomodoro}
+              onChange={event => {
+                this.setState({ pomodoro: event.target.value })
+              }}
+              id="time_pomodoro"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Pomodoro"
+            />
+          </Grid.Row>
+          <Grid.Row>
+            <Input
+              value={this.state.shortBreak}
+              onChange={event => {
+                this.setState({ shortbreak: event.target.value })
+              }}
+              id="time_shortbreak"
+              type="number"
+              min="1"
+              step="1"
+              size="mini"
+              label="Short Break"
+            />
+          </Grid.Row>
+          <Button
+            color="green"
+            onClick={() => {
+              this.handleSave(
+                this.state.pomodoro,
+                this.state.shortbreak,
+                this.state.longbreak,
+                this.props.close
+              )
+            }}
+          >
+            Save Setting
+          </Button>
+          {authentication}
+          {syncingDataFromCloud}
+          {logout}
+        </Grid>
       </div>
     )
   }

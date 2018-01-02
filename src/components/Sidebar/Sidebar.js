@@ -46,6 +46,7 @@ class Sidebar extends React.Component {
         <div className="button">
           <SettingPopup />
           <Button
+            floated="right"
             color="green"
             size="big"
             content="Statistic"

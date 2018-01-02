@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Popup, Button, Header, Input, Image, Modal } from 'semantic-ui-react'
+import { Grid, Button, Header, Input, Image, Modal } from 'semantic-ui-react'
 import fire from '../../javascripts/firebase'
 import _ from 'lodash'
 
@@ -47,25 +47,33 @@ class Authentication extends Component {
           <Modal.Header>Setting Data Cloud</Modal.Header>
           <Modal.Content>
             <Modal.Description>
-              <Input
-                value={this.state.email}
-                onChange={event => {
-                  this.setState({ email: event.target.value })
-                }}
-                id="user_email"
-                type="emai"
-                label="Email"
-              />
-              <Input
-                value={this.state.password}
-                onChange={event => {
-                  this.setState({ password: event.target.value })
-                }}
-                id="user_password"
-                type="password"
-                min="1"
-                label="Password"
-              />
+              <Grid>
+                <Grid.Row columns={2}>
+                  <Grid.Column>
+                    <Input
+                      value={this.state.email}
+                      onChange={event => {
+                        this.setState({ email: event.target.value })
+                      }}
+                      id="user_email"
+                      type="emai"
+                      label="Email"
+                    />
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Input
+                      value={this.state.password}
+                      onChange={event => {
+                        this.setState({ password: event.target.value })
+                      }}
+                      id="user_password"
+                      type="password"
+                      min="1"
+                      label="Password"
+                    />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
