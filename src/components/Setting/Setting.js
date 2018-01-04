@@ -145,7 +145,6 @@ class Setting extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('current user state: ', state.user)
   return {
     login: state.user.login,
     pomodoro: state.user.user.settings.pomodoro,
@@ -168,6 +167,4 @@ function mapDispatchToProps(dispatch) {
   )
 }
 
-// Promote MainButtons from a component to a container - it needs to know about
-// this new dispatch method, countDown. Make it available as a prop.
 export default connect(mapStateToProps, mapDispatchToProps)(Setting)

@@ -71,17 +71,17 @@ export default class extends React.Component {
         <div className="chart-content">
           <Grid columns={3} divided textAlign="center">
             <Grid.Row>
-              <Grid.Column centered>
+              <Grid.Column>
                 <img src={ringsvg} className="summary-icon" />
                 <p>Focus Count</p>
                 <h2>99</h2>
               </Grid.Column>
-              <Grid.Column centered>
+              <Grid.Column>
                 <img src={clocksvg} className="summary-icon" />
                 <p>Focus Hour</p>
                 <h2>0</h2>
               </Grid.Column>
-              <Grid.Column centered>
+              <Grid.Column>
                 <img src={heartsvg} className="summary-icon" />
                 <p>Concentration</p>
                 <h2>86%</h2>

@@ -1,4 +1,5 @@
 // Here is how the Application's state is generated
 import user from './user_reducer'
 import pomodoro from './pomodoroReducer'
-export { pomodoro, user }
+import layout from './layoutReducer'
+export { pomodoro, user, layout }

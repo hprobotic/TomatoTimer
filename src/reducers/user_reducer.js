@@ -6,7 +6,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
   SYNCING_DATA_SUCCESS
-} from '../actions/index'
+} from '../actions'
 
 const initialState = {
   login: false,

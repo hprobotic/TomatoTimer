@@ -18,6 +18,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 export const SYNCING_DATA_SUCCESS = 'SYNCING_DATA_SUCCESS'
 export const SYNCING_DATA_FAILURE = 'SYNCING_DATA_FAILURE'
+export const SIDEBAR_TOGGLE = 'SIDEBAR_TOGGLE'
 
 export function saveSetting(pomodoro, shortbreak, longbreak) {
   localStorage.setItem('pomodoro', pomodoro)
@@ -177,5 +178,15 @@ export function syncingData(email) {
         },
         error => console.log(error)
       )
+  }
+}
+
+export const toggleSidebar = menuItem => {
+  console.log(menuItem)
+  return {
+    type: SIDEBAR_TOGGLE,
+    payload: {
+      menuItem
+    }
   }
 }
