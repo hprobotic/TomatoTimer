@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import axious from 'axios'
 import fire from '../../javascripts/firebase'
@@ -11,7 +11,7 @@ import './Timer.css'
 
 const PROGRESS_CIRCUMFERENCE = 992.743278534
 
-class MainButtons extends Component {
+class MainButtons extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -40,7 +40,6 @@ class MainButtons extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps)
     if (this.props.seconds !== nextProps.seconds) {
       this.onResetButtonPressed()
       this.setState({
@@ -71,7 +70,6 @@ class MainButtons extends Component {
           this.props.defaultBreak()
           break
         case 83:
-          // console.log('hello')
           this.props.shortBreak()
           break
         case 76:

@@ -16,8 +16,11 @@ import {
 } from 'recharts'
 import { scaleOrdinal, schemeCategory10 } from 'd3-scale'
 import _ from 'lodash'
-import { Button, Label, Grid } from 'semantic-ui-react'
+import { Button, Label, Grid, Icon } from 'semantic-ui-react'
 import './Chart.css'
+import ringsvg from './ring.svg'
+import clocksvg from './clock.svg'
+import heartsvg from './heart.svg'
 
 const randomChangeArray = array => {}
 
@@ -52,24 +55,40 @@ const data = [
 export default class extends React.Component {
   render() {
     return (
-      <div>
-        {/* <Button floated="right" color="gray">Close</Button> */}
+      <div className="chart-container">
         <Grid centered>
           <Grid.Row>
-            <BarChart width={300} height={400} data={data}>
-              <Bar dataKey="hour" fill="#ffa500" />
-              <XAxis
-                dataKey="name"
-                fill="#3b5998"
-                label={{ fill: '#3b5998', position: 'insideStart' }}
-              />
-              <YAxis />
-            </BarChart>
+            <h2 className="focus-count">99</h2>
+            <div className="focus-dot" />
           </Grid.Row>
           <Grid.Row>
-            <Label color="blue"> Weekly Average: 5.5 </Label>
+            <div className="focus-label">
+              <h3>Focus Today</h3>
+              <p>04/01/2018</p>
+            </div>
           </Grid.Row>
         </Grid>
+        <div className="chart-content">
+          <Grid columns={3} divided textAlign="center">
+            <Grid.Row>
+              <Grid.Column centered>
+                <img src={ringsvg} className="summary-icon" />
+                <p>Focus Count</p>
+                <h2>99</h2>
+              </Grid.Column>
+              <Grid.Column centered>
+                <img src={clocksvg} className="summary-icon" />
+                <p>Focus Hour</p>
+                <h2>0</h2>
+              </Grid.Column>
+              <Grid.Column centered>
+                <img src={heartsvg} className="summary-icon" />
+                <p>Concentration</p>
+                <h2>86%</h2>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </div>
       </div>
     )
   }

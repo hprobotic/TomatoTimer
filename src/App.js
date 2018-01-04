@@ -1,12 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Timer,
-  Quotes,
-  KeyboardShortcuts,
-  Sidebar,
-  Chart,
-  Setting
-} from './components'
+import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components'
 import './App.css'
 import { Grid, Image } from 'semantic-ui-react'
 import './App.css'
@@ -19,6 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="overlay" />>
         <div className="random-bg" />
         <div className="grid-container">
           <div className="item item-1">
@@ -30,10 +24,7 @@ class App extends Component {
             </div>
           </div>
           <div className="item item-2">
-            <Sidebar>
-              <Chart name="Chart" visibility="hidden" />
-              <Setting name="Setting" visibility="hidden" />
-            </Sidebar>
+            <Sidebar />
           </div>
           <div className="item item-4">
             <Timer />

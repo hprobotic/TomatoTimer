@@ -1,1 +1,58 @@
+.chart-container * {
+  color: #212b35;
+}
+.focus-count {
+  font-size: 60px;
+  width: 140px;
+  height: 140px;
+  border-radius: 70px;
+  border: 1px solid #c4cdd5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 25px;
+  position: relative;
+}
+.chart-content {
+  margin-top: 20px;
+}
 
+.summary-icon {
+  height: 50px;
+  width: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.focus-dot {
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  animation: rotating 12s linear infinite;
+}
+.focus-dot::after {
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin: -5px auto;
+  background: #bf0711;
+  border-radius: 5.5px;
+  content: ' ';
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
