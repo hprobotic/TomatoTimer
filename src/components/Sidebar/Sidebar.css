@@ -86,3 +86,7 @@
   align-items: center;
   padding-right: 32px;
 }
+
+.content-wrapper {
+  padding: 32px;
+}

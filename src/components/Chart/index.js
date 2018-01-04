@@ -58,7 +58,7 @@ export default class extends React.Component {
       <div className="chart-container">
         <Grid centered>
           <Grid.Row>
-            <h2 className="focus-count">99</h2>
+            <h2 className="focus-count">0</h2>
             <div className="focus-dot" />
           </Grid.Row>
           <Grid.Row>
@@ -74,7 +74,7 @@ export default class extends React.Component {
               <Grid.Column>
                 <img src={ringsvg} className="summary-icon" />
                 <p>Focus Count</p>
-                <h2>99</h2>
+                <h2>0</h2>
               </Grid.Column>
               <Grid.Column>
                 <img src={clocksvg} className="summary-icon" />
@@ -84,7 +84,7 @@ export default class extends React.Component {
               <Grid.Column>
                 <img src={heartsvg} className="summary-icon" />
                 <p>Concentration</p>
-                <h2>86%</h2>
+                <h2>0%</h2>
               </Grid.Column>
             </Grid.Row>
           </Grid>

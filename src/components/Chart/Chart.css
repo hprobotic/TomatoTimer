@@ -28,7 +28,7 @@
   width: 140px;
   height: 140px;
   position: absolute;
-  animation: rotating 12s linear infinite;
+  animation: rotating 60s linear infinite;
 }
 .focus-dot::after {
   display: block;

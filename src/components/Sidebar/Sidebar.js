@@ -55,8 +55,10 @@ class Sidebar extends React.Component {
               onClick={this.hideMenu}
             />
           </h2>
-          {showingItem === 'charts' && <Chart />}
-          {showingItem === 'settings' && <Setting />}
+          <div className="content-wrapper">
+            {showingItem === 'charts' && <Chart />}
+            {showingItem === 'settings' && <Setting />}
+          </div>
         </div>
       </div>
     )

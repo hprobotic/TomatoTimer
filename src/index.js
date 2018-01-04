@@ -14,7 +14,6 @@ import './index.css'
 
 const config = {
   key: 'root',
-  blacklist: ['user', 'pomodoro'],
   storage
 }
 

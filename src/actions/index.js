@@ -19,14 +19,14 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 export const SYNCING_DATA_SUCCESS = 'SYNCING_DATA_SUCCESS'
 export const SYNCING_DATA_FAILURE = 'SYNCING_DATA_FAILURE'
 export const SIDEBAR_TOGGLE = 'SIDEBAR_TOGGLE'
+export const CHANGE_COUNTDOWN = 'CHANGE_COUNTDOWN'
 
-export function saveSetting(pomodoro, shortbreak, longbreak) {
-  localStorage.setItem('pomodoro', pomodoro)
-  localStorage.setItem('shortBreak', shortbreak)
-  localStorage.setItem('longBreak', longbreak)
+export function saveSetting(settings) {
   return {
     type: SAVE_SETTING,
-    seconds: localStorage.getItem('pomodoro')
+    payload: {
+      settings
+    }
   }
 }
 
@@ -55,6 +55,14 @@ export function resetCountdown() {
 export function defaultBreak() {
   return {
     type: DEFAULT_BREAK
+  }
+}
+export const changeCountDown = newCount => {
+  return {
+    type: CHANGE_COUNTDOWN,
+    payload: {
+      newCount: newCount * 60
+    }
   }
 }
 
@@ -168,9 +176,6 @@ export function syncingData(email) {
           let user = _.first(_.values(snapshot.val()))
           let settings = user.settings
           getState().pomodoro.seconds = settings.pomodoro * 60
-          localStorage.setItem('pomodoro', settings.pomodoro)
-          localStorage.setItem('shortBreak', settings.shortBreak)
-          localStorage.setItem('longBreak', settings.longBreak)
           dispatch({
             type: SYNCING_DATA_SUCCESS,
             user: user
@@ -182,7 +187,6 @@ export function syncingData(email) {
 }
 
 export const toggleSidebar = menuItem => {
-  console.log(menuItem)
   return {
     type: SIDEBAR_TOGGLE,
     payload: {
