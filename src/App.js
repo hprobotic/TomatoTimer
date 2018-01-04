@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-import {
-  Timer,
-  Quotes,
-  KeyboardShortcuts,
-  Sidebar,
-  Chart,
-  Setting
-} from './components'
+import { connect } from 'react-redux'
+import { Timer, Quotes, KeyboardShortcuts, Sidebar } from './components'
 import './App.css'
 import { Grid, Image } from 'semantic-ui-react'
 import './App.css'
@@ -17,23 +11,22 @@ class App extends Component {
   }
 
   render() {
+    const { isSidebarShowing } = this.props
     return (
       <div className="App">
+        <div className={isSidebarShowing ? `overlay active` : `overlay`} />
         <div className="random-bg" />
         <div className="grid-container">
           <div className="item item-1">
             <div className="logo">
               <span className="title">Tomato Timer</span>
               <span className="description">
-                <span>100K+ </span> focus hours
+                <span>100K+ </span>focus hours
               </span>
             </div>
           </div>
           <div className="item item-2">
-            <Sidebar>
-              <Chart name="Chart" visibility="hidden" />
-              <Setting name="Setting" visibility="hidden" />
-            </Sidebar>
+            <Sidebar />
           </div>
           <div className="item item-4">
             <Timer />
@@ -48,4 +41,8 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => ({
+  isSidebarShowing: state.layout.sidebar.isShowing
+})
+
+export default connect(mapStateToProps, undefined)(App)

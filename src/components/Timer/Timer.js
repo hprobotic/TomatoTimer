@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import axious from 'axios'
 import fire from '../../javascripts/firebase'
@@ -6,12 +6,17 @@ import _ from 'lodash'
 
 import { connect } from 'react-redux'
 import { Grid, Button } from 'semantic-ui-react'
-import { defaultBreak, shortBreak, longBreak } from '../../actions'
+import {
+  defaultBreak,
+  shortBreak,
+  longBreak,
+  changeCountDown
+} from '../../actions'
 import './Timer.css'
 
 const PROGRESS_CIRCUMFERENCE = 992.743278534
 
-class MainButtons extends Component {
+class MainButtons extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,14 +28,6 @@ class MainButtons extends Component {
 
   componentWillMount() {
     document.addEventListener('keydown', this.handleKeyDown.bind(this))
-    // let users = fire.database().ref('users')
-    // // console.log(`Users: ${users}`)
-    // users.once('value', snapshot => {
-    //   console.log(snapshot.val())
-    //   this.setState({
-    //     currentSeconds: snapshot.val().settings.pomodoro * 60
-    //   })
-    // })
   }
 
   componentDidMount() {
@@ -40,7 +37,6 @@ class MainButtons extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps)
     if (this.props.seconds !== nextProps.seconds) {
       this.onResetButtonPressed()
       this.setState({
@@ -69,13 +65,15 @@ class MainButtons extends Component {
       switch (e.which) {
         case 80:
           this.props.defaultBreak()
+          this.props.changeCountDown(this.props.settings['pomodoro'])
           break
         case 83:
-          // console.log('hello')
           this.props.shortBreak()
+          this.props.changeCountDown(this.props.settings['shortBreak'])
           break
         case 76:
           this.props.longBreak()
+          this.props.changeCountDown(this.props.settings['longBreak'])
           break
         case 82:
           this.onStopButtonPressed()
@@ -228,21 +226,16 @@ class MainButtons extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    seconds: state.pomodoro.seconds
-  }
-}
+const mapStateToProps = state => ({
+  seconds: state.pomodoro.seconds,
+  settings: state.user.user.settings
+})
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      shortBreak: shortBreak,
-      longBreak: longBreak,
-      defaultBreak: defaultBreak
-    },
-    dispatch
-  )
-}
+const mapDispatchToProps = dispatch => ({
+  shortBreak: () => dispatch(shortBreak()),
+  longBreak: () => dispatch(longBreak()),
+  defaultBreak: () => dispatch(defaultBreak()),
+  changeCountDown: newCount => dispatch(changeCountDown(newCount))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainButtons)

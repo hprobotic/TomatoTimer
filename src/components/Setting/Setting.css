@@ -1,1 +1,9 @@
+.notification-option {
+  justify-content: space-between;
+}
 
+.setting-form .ui.form .field > label,
+.ui.form .inline.fields > label {
+  font-size: 16px;
+  font-weight: 400;
+}

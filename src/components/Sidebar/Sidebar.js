@@ -1,64 +1,77 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import _ from 'lodash'
+import { Chart, Setting } from '../'
 import { Button, Grid } from 'semantic-ui-react'
 import './Sidebar.css'
 import SettingPopup from '../../components/SettingPopup/index'
+import { toggleSidebar } from '../../actions'
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      visible: false,
-      showItem: 'None'
-    }
   }
 
-  showChartMenu() {
-    const visible =
-      this.state.showItem === 'Setting' && this.state.visible
-        ? true
-        : !this.state.visible
-    this.setState({
-      visible: visible,
-      showItem: 'Chart'
-    })
+  showMenu = item => {
+    this.props.toggleSidebar(item)
   }
 
-  showSettingMenu() {
-    const visible =
-      this.state.showItem === 'Chart' && this.state.visible
-        ? true
-        : !this.state.visible
-    this.setState({
-      visible: visible,
-      showItem: 'Setting'
-    })
+  hideMenu = () => {
+    this.props.toggleSidebar()
   }
 
   render() {
     let self = this
-    const className = self.state.visible ? 'menuShow' : 'menuHide'
-    const child = self.props.children.filter(function(ele) {
-      console.log('current state: ', self.state.showItem)
-      return ele.props.name === self.state.showItem
-    })
+    const { showingItem, isShowing } = this.props
+    const sidebarClass = isShowing ? 'sidebar active' : 'sidebar'
+    const menuShowing = true
     return (
-      <div>
-        <div>
-          <SettingPopup />
+      <div className={sidebarClass}>
+        <div className="sidebar-control">
           <Button
-            className="statistic-btn"
-            floated="left"
-            color="green"
+            circular
+            icon="settings"
             size="big"
-            content="Statistic"
-            onClick={self.showChartMenu.bind(self)}
+            inverted
+            onClick={() => this.showMenu('settings')}
+          />
+          <Button
+            circular
+            icon="bar chart"
+            size="big"
+            inverted
+            onClick={() => this.showMenu('charts')}
           />
         </div>
-        <div className={className}>{child}</div>
+        {console.log('showing: ', showingItem)}
+        <div className="sidebar-content">
+          <h2 className="content-title">
+            {showingItem}
+            <Button
+              circular
+              icon="close"
+              size="big"
+              hidden={menuShowing}
+              onClick={this.hideMenu}
+            />
+          </h2>
+          <div className="content-wrapper">
+            {showingItem === 'charts' && <Chart />}
+            {showingItem === 'settings' && <Setting />}
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-export default Sidebar
+const mapStateToProps = state => ({
+  showingItem: state.layout.sidebar.showingItem,
+  isShowing: state.layout.sidebar.isShowing
+})
+
+const mapDispatchToProps = dispatch => ({
+  toggleSidebar: item => dispatch(toggleSidebar(item))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)

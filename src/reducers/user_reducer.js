@@ -5,23 +5,32 @@ import {
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
-  SYNCING_DATA_SUCCESS
-} from '../actions/index'
+  SYNCING_DATA_SUCCESS,
+  SAVE_SETTING
+} from '../actions'
 
 const initialState = {
   login: false,
   user: {
     email: '',
     settings: {
-      pomodoro: localStorage.getItem('pomodoro') || 25,
-      shortBreak: localStorage.getItem('shortBreak') || 5,
-      longBreak: localStorage.getItem('longBreak') || 10
+      pomodoro: 25,
+      shortBreak: 5,
+      longBreak: 10
     }
   }
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case SAVE_SETTING:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          settings: action.payload.settings
+        }
+      }
     case SIGNUP_SUCCESS:
       console.log('Sign up successfully')
       return {

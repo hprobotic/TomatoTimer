@@ -17,13 +17,7 @@ class Authentication extends Component {
 
   signupFirebase() {
     const { email, password } = this.state
-    this.props.signUp(
-      email,
-      password,
-      localStorage.getItem('pomodoro'),
-      localStorage.getItem('shortBreak'),
-      localStorage.getItem('longBreak')
-    )
+    this.props.signUp(email, password)
     this.close()
   }
 
