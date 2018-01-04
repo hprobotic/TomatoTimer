@@ -35,7 +35,6 @@ class Sidebar extends React.Component {
             inverted
             onClick={() => this.showMenu('settings')}
           />
-
           <Button
             circular
             icon="bar chart"
@@ -46,10 +45,8 @@ class Sidebar extends React.Component {
         </div>
         {console.log('showing: ', showingItem)}
         <div className="sidebar-content">
-          {showingItem === 'charts' && <Chart />}
-          {showingItem === 'settings' && <Setting />}
-
-          <div className="sidebar-footer">
+          <h2 className="content-title">
+            {showingItem}
             <Button
               circular
               icon="close"
@@ -57,7 +54,9 @@ class Sidebar extends React.Component {
               hidden={menuShowing}
               onClick={this.hideMenu}
             />
-          </div>
+          </h2>
+          {showingItem === 'charts' && <Chart />}
+          {showingItem === 'settings' && <Setting />}
         </div>
       </div>
     )
