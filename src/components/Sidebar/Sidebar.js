@@ -32,6 +32,7 @@ class Sidebar extends React.Component {
             circular
             icon="settings"
             size="big"
+            inverted
             onClick={() => this.showMenu('settings')}
           />
 
@@ -39,6 +40,7 @@ class Sidebar extends React.Component {
             circular
             icon="bar chart"
             size="big"
+            inverted
             onClick={() => this.showMenu('charts')}
           />
         </div>
